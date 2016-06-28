@@ -21,16 +21,26 @@
         <div class="container">
             <div class="row">
 
-{!! Form::open(array('url' => 'foo/bar')) !!}
+{{ Form::open(array('url' => 'foo/bar')) }}
+
+
+ <div class="form-group"> 
+ {{ Form::label('nome', 'Il tuo nome') }} 
+ {{ Form::text('nome', null, ['class' => 'form-control']) }}
+
+ </div> 
+
+
     
-{!! Form::close() !!}
+{{ Form::close() }}
 
 
 
             </div>
         </div>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
 
     </body>
 </html>
