@@ -244,6 +244,12 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+                        
+                        <li {{ (Request::is('*Dipendenti') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('dipendenti') }}"><i class="fa fa-user fa-fw"></i>Dipendenti</a>
+                        </li>
+                        
+                        
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>

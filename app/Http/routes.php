@@ -79,5 +79,4 @@ Route::get('/documentation', function()
 
 
 
-
 Route::resource('dipendenti', 'dipendentiController');

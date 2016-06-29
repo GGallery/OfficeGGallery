@@ -131,6 +131,7 @@ return [
         
         'Illuminate\Broadcasting\BroadcastServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
+        'Barryvdh\Debugbar\ServiceProvider',
         
     ],
     /*
@@ -181,5 +182,7 @@ return [
         
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
     ],
 ];

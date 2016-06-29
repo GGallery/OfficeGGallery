@@ -15,13 +15,14 @@
                     <th>Nome</th> 
                     <th>Cognome</th> 
                     <th>Email</th>  
+                    <th>Societa</th>  
                     <th> </th>  
                 </tr>  
             </thead> 
             <tbody> 
 
 
-                @foreach($data['dipendenti'] as $dip) 
+                @foreach($data as $dip) 
 
 
                 <tr> 
@@ -30,6 +31,8 @@
                     <td>{{ $dip->nome }}</td>
                     <td>{{ $dip->cognome }}</td>
                     <td>{{ $dip->email }}</td>
+                    <td>{{ $dip->societa }}</td>
+                    
                     <td><a href="dipendenti/{{$dip->id}}/edit">modifica</a></td>
                 </tr>  
 
