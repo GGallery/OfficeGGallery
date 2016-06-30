@@ -81,3 +81,9 @@ Route::get('/documentation', function()
 
 Route::resource('dipendenti', 'dipendentiController');
 Route::resource('commesse', 'commesseController');
+
+
+Route::get('/search', function()
+{
+	return 'trovato';
+});

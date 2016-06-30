@@ -39,8 +39,23 @@
     </div>
 
 
+    <div class="form-group">
+        {{ Form::label('cliente', 'Cliente:') }}
 
-    <div class="pull-right">
+        {{ Form::select('cliente_id', $clienti_list, Input::old('cliente_id') , ['class' => 'form-control']) }}
+    </div>
+
+
+
+   <div class="form-group">
+        {{ Form::label('test', 'test:') }}
+
+        {{ Form::text('test','test', ['class' => 'form-control']) }}
+    </div>
+
+
+
+    <div class="pull-right" id="q">
         {{ Form::submit('aggiorna', ['class' => 'btn btn-success']) }}
 
         {{ Form::close() }}
@@ -52,7 +67,6 @@
         {{ Form::submit('Cancella', ['class' => 'btn btn-danger']) }}
         {{ Form::close() }}
     </div>
-
 
 
     @stop

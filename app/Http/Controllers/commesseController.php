@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\commesse;
+use App\clienti;
 
 class commesseController extends Controller {
 
@@ -15,14 +16,13 @@ class commesseController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
-//        $data = commesse::with('Clienti')->get();
+        
+        //$data = commesse::with('Clienti')->get();
 
         $commesse = new \App\commesse();
-        
-        
+                
         $data = $commesse->lista();
-
+        
         return view('commesse.index', compact('data'));
         
         
@@ -66,7 +66,10 @@ class commesseController extends Controller {
     public function edit($id) {
         //
         $data['datiRecuperati'] = \App\commesse::find($id);
-        return view('commesse.edit', $data);
+
+        $clienti_list = clienti::lists('nome', 'id');
+
+        return view('commesse.edit', $data)->with('clienti_list', $clienti_list);
     }
 
     /**

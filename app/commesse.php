@@ -24,10 +24,11 @@ class commesse extends Model
         $search =   Input::get('search');
         
         return \App\commesse::with('Clienti')
-                ->where('oggetto','like', '%'.$search.'%')
-                ->with('clienti')
+                ->orWhere('oggetto','like', '%'.$search.'%')
+                ->orWhere('protocollo','like', '%'.$search.'%')
                 ->paginate(15);
     }
     
+
     
 }
