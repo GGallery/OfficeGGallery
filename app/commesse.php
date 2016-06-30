@@ -25,6 +25,7 @@ class commesse extends Model
         
         return \App\commesse::with('Clienti')
                 ->where('oggetto','like', '%'.$search.'%')
+                ->with('clienti')
                 ->paginate(15);
     }
     

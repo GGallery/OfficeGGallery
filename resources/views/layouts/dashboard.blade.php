@@ -236,14 +236,16 @@
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
                             
-                            <form action="commesse">
-                                <input type="text" class="form-control" placeholder="Search...">
+                            {{ Form::open(['method'=>'GET','url'=>'commesse','class'=>'navbar-form navbar-left','role'=>'search'])  }}
+                                <input name="search" type="text" class="form-control" placeholder="Cerca...">
+                               
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
-                            </form>
+                                
+                            {{ Form::close()  }}
                             
                             
                         </div>
