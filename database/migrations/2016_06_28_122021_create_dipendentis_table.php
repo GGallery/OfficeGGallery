@@ -11,7 +11,7 @@ class CreateDipendentisTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('dipendenti', function(Blueprint $table) {
+        Schema::create('cm_dipendenti', function(Blueprint $table) {
             $table->increments('id');
             $table->string('cognome');
             $table->string('nome');
@@ -21,10 +21,6 @@ class CreateDipendentisTable extends Migration {
             $table->integer('societa_id')->unsigned();
             $table->foreign('societa_id')->references('id')->on('societa');
             $table->timestamps();
-        });
-
-        Schema::table('users', function ($table) {
-            
         });
     }
 

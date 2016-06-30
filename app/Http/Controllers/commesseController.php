@@ -3,22 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\commesse;
 
-class commesseController extends Controller
-{
+class commesseController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
-        $data= dipendenti::all();
+//        $data = commesse::with('Clienti')->get();
+
+        $commesse = new \App\commesse();
+        
+        
+        $data = $commesse->lista();
+
         return view('commesse.index', compact('data'));
+        
+        
     }
 
     /**
@@ -26,8 +33,7 @@ class commesseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -37,8 +43,7 @@ class commesseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -48,8 +53,7 @@ class commesseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -59,9 +63,10 @@ class commesseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
+        $data['datiRecuperati'] = \App\commesse::find($id);
+        return view('commesse.edit', $data);
     }
 
     /**
@@ -71,8 +76,7 @@ class commesseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -82,8 +86,8 @@ class commesseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
+
 }

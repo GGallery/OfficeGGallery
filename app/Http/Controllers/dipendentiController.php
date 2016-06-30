@@ -5,18 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\dipendenti;
 
 class dipendentiController extends Controller {
 
     //
     public function index() {
-        
-        $data= dipendenti::with('societa')->get();
-        return view('dipendenti.index', compact('data'));
 
-        }
+        $data = dipendenti::with('societa')->get();
+        return view('dipendenti.index', compact('data'));
+    }
 
     public function edit($id) {
         $data['datiRecuperati'] = \App\dipendenti::find($id);

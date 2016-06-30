@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class societa extends Model {
 
     //
-    protected $table = 'societa';
+    protected $table = 'cm_societa';
 
     
      public function dipendenti()

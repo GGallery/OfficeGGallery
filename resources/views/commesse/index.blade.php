@@ -1,46 +1,35 @@
 @extends('layouts.dashboard')
-@section('page_heading','Dipendenti')
+@section('page_heading','Commesse')
 
 
 @section('section')
-
-
 <div class="row">
     <div class="col-sm-6">
-
-
         <table class="table table-striped">
-
             <thead>  <tr>  
-                    <th>Nome</th> 
-                    <th>Cognome</th> 
-                    <th>Email</th>  
-                    <th>Societa</th>  
-                    <th> </th>  
+                    <th>id</th> 
+                    <th>Protocollo</th> 
+                    <th>Cliente</th>  
+                    <th>Oggetto</th>  
+                    <th>Stato</th>  
+                    <th>Referente</th>  
                 </tr>  
             </thead> 
             <tbody> 
-
-                @foreach($data as $dip) 
-
+                @foreach($data as $val) 
                 <tr> 
-                    <td>{{ $dip->nome }}</td>
-                    <td>{{ $dip->cognome }}</td>
-                    <td>{{ $dip->email }}</td>
-                    <td>{{ $dip->societa->societa }}</td>
-                    <td><a class="btn btn-warning" href="dipendenti/{{$dip->id}}/edit">modifica</a></td>
+                    <td>{{ $val->id }}</td>
+                    <td>{{ $val->protocollo }}</td>
+                    <td>{{ $val->clienti->nome }}</td>
+                    <td>{{ $val->oggetto }}</td>
+                    <td>{{ $val->stato }}</td>
+                    <td>{{ $val->referente }}</td>
+                    <td><a class="btn btn-warning" href="commesse/{{$val->id}}/edit">modifica</a></td>
                 </tr>  
-
                 @endforeach 
-
             </tbody> 
-
-
         </table>
+        {{ $data->render() }}
     </div>
 </div>
-
-
-
-
 @stop

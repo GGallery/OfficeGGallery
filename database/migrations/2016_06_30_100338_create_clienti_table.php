@@ -3,19 +3,21 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocietaTable extends Migration {
-
+class CreateClientiTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
+    public function up()
+    {
         //
-        Schema::create('cm_societa', function(Blueprint $table) {
+        Schema::create('cm_clienti', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('societa');
-            $table->string('colore');
+            $table->string('nome');
+            $table->timestamps();
+            
         });
     }
 
@@ -24,9 +26,8 @@ class CreateSocietaTable extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         //
-        Schema::drop('societa');
     }
-
 }

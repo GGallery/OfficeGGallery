@@ -13,10 +13,11 @@ class CreateCommesseTable extends Migration
     public function up()
     {
         //
-         Schema::create('commesse', function(Blueprint $table) {
+         Schema::create('cm_commesse', function(Blueprint $table) {
             $table->increments('id');
             $table->string('protocollo');
-            $table->string('cliente');
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('cm_clienti');
             $table->string('oggetto');
             $table->string('stato');
             $table->string('referente');
