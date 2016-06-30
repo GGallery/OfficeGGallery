@@ -21,19 +21,14 @@
             </thead> 
             <tbody> 
 
-
                 @foreach($data as $dip) 
 
-
                 <tr> 
-
-
                     <td>{{ $dip->nome }}</td>
                     <td>{{ $dip->cognome }}</td>
                     <td>{{ $dip->email }}</td>
-                    <td>{{ $dip->societa }}</td>
-                    
-                    <td><a href="dipendenti/{{$dip->id}}/edit">modifica</a></td>
+                    <td>{{ $dip->societa->societa }}</td>
+                    <td><a class="btn btn-warning" href="dipendenti/{{$dip->id}}/edit">modifica</a></td>
                 </tr>  
 
                 @endforeach 

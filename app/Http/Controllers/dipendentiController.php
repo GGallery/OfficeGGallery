@@ -13,17 +13,10 @@ class dipendentiController extends Controller {
     //
     public function index() {
         
-        
-//        $data = \App\dipendenti::all();
-        
-        $data= dipendenti::with('societa')->get();;
-
-        
-        
-        \Debugbar::info($data);
-        
+        $data= dipendenti::with('societa')->get();
         return view('dipendenti.index', compact('data'));
-    }
+
+        }
 
     public function edit($id) {
         $data['datiRecuperati'] = \App\dipendenti::find($id);

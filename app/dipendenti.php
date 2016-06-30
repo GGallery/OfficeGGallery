@@ -12,7 +12,7 @@ class dipendenti extends Model {
 
     public function societa() {
         
-        return $this->hasOne('App\Societa' , 'societa_id');
+        return $this->belongsTo('App\Societa');
         
     }
 }

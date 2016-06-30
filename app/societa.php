@@ -12,7 +12,7 @@ class societa extends Model {
     
      public function dipendenti()
     {
-        return $this->belongsToMany('App\dipendenti' , 'societa_id');
+        return $this->hasMany('App\dipendenti');
     }
 
     
