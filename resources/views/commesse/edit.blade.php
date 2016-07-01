@@ -26,11 +26,7 @@
         {{ Form::label('protocollo', 'Protocollo:') }}
         {{ Form::text('protocollo', null, ['class' => 'form-control']) }}
     </div>
-
-    <div class="form-group">
-        {{ Form::label('cliente_id', 'Cliente:') }}
-        {{ Form::text('cliente_id', null, ['class' => 'form-control']) }}
-    </div>
+    
 
     <div class="form-group">
         {{ Form::label('oggetto', 'Oggetto:') }}
@@ -44,15 +40,6 @@
 
         {{ Form::select('cliente_id', $clienti_list, Input::old('cliente_id') , ['class' => 'form-control']) }}
     </div>
-
-
-
-   <div class="form-group">
-        {{ Form::label('test', 'test:') }}
-
-        {{ Form::text('test','test', ['class' => 'form-control']) }}
-    </div>
-
 
 
     <div class="pull-right" id="q">

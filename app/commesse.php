@@ -19,16 +19,11 @@ class commesse extends Model
     }
     
     public function lista(){
-        
-        
         $search =   Input::get('search');
-        
         return \App\commesse::with('Clienti')
                 ->orWhere('oggetto','like', '%'.$search.'%')
                 ->orWhere('protocollo','like', '%'.$search.'%')
                 ->paginate(15);
     }
-    
-
     
 }
