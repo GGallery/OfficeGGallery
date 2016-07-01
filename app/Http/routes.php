@@ -68,9 +68,7 @@ Route::get('/documentation', function() {
 
 Route::resource('dipendenti', 'dipendentiController');
 Route::resource('commesse', 'commesseController');
-
-
-
+Route::resource('calendario', 'calendarioController');
 
 
 //AUTOCOMPLETE 
@@ -78,4 +76,3 @@ Route::get('autocomplete/commesse', 'autocompleteController@Commesse');
 Route::get('autocomplete', function() {
     return View::make('autocomplete');
 });
-
