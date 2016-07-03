@@ -375,3 +375,4 @@
 </div>
 @stop
 
+@yield('script')

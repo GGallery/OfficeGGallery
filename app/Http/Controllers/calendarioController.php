@@ -15,8 +15,8 @@ class calendarioController extends Controller {
      */
     public function index() {
         //
-        
-        return view('calendario.index');
+        \Debugbar::info('index');
+        return view('calendario.create');
         
     }
 
@@ -27,6 +27,7 @@ class calendarioController extends Controller {
      */
     public function create() {
         //
+        \Debugbar::info('create');
          return view('calendario.create');
     }
 
@@ -38,6 +39,8 @@ class calendarioController extends Controller {
      */
     public function store(Request $request) {
         // 
+        \Debugbar::info('store');
+        
         $this->validate($request, [
             'dipendenti_id' => 'required'
             , 'commessa_id' => 'required'
@@ -51,11 +54,16 @@ class calendarioController extends Controller {
         $calendario->dipendenti_id = $request->input('dipendenti_id');
         $calendario->commessa_id = $request->input('commessa_id');
 
-        \Debugbar::info($calendario);
-        
+        try{
         $calendario->save();
+            }
+        catch(Exception $e){
+             // do task when error
+             \Debugbar::addException($e);
+        }
 
-        return redirect('calendario.ok')->with('ok_message', 'Ok commessa aggiunta correttamente');
+
+        return redirect('calendario')->with('ok_message', 'Ok commessa aggiunta correttamente');
     }
 
     /**

@@ -12,10 +12,20 @@
 	<meta content="" name="GGAP"/>
 	<meta content="" name="Antonio Giangravè"/>
 
+<link rel="stylesheet"href="//codeorigin.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
 </head>
 <body>
 	@yield('body')
+
+
+        
+
 	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
+	<script src="//codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+
+	@yield('script')
+
 </body>
 </html>

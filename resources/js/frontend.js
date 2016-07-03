@@ -1,3 +1,5 @@
+var APP_URL = {{ json_encode(url('/')) }};
+
 
 var lineChartData = {
     labels : ["January","February","March","April","May","June","July"],

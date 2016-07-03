@@ -21,13 +21,14 @@ class autocompleteController extends Controller {
         $results = array();
 
         $queries = \DB::table('cm_commesse')
-                ->where('referente', 'LIKE', '%' . $term . '%')
+                ->where('oggetto', 'LIKE', '%' . $term . '%')
                 ->orWhere('protocollo', 'LIKE', '%' . $term . '%')
                 ->get();
 
         foreach ($queries as $query) {
-            $results[] = [ 'id' => $query->id, 'value' => $query->referente . ' ' . $query->protocollo];
+            $results[] = [ 'id' => $query->id, 'value' => $query->protocollo . ' ' . $query->oggetto];
         }
+        \Debugbar::info($results);
         return \Response::json($results);
     }
 
