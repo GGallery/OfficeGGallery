@@ -70,7 +70,7 @@ console.log(APP_URL);
               //  console.log(APP_URL);
 
                 $("#commessa_id_text").autocomplete({
-                    source: "../autocomplete/commesse",
+                    source: APP_URL+"/autocomplete/commesse",
                     minLength: 3,
                     select: function (event, ui) {
                         $('#commessa_id_text').val(ui.item.value);
