@@ -44,15 +44,21 @@ class calendarioController extends Controller {
         $this->validate($request, [
             'dipendenti_id' => 'required'
             , 'commessa_id' => 'required'
+            , 'n_ore' => 'required'
+            , 'giorno' => 'required'
                 ], [
             'dipendenti_id.required' => 'dipendenti_id me lo devi dire'
             , 'commessa_id.required' => 'Se non mi dici per cosa è la commessa è inutile'
+            , 'n_ore.required' => 'Inserisci il numero di ore'
+            , 'giorno.required' => 'Insrisci il giorno'
         ]);
 
         $calendario = new \App\calendario();
 
         $calendario->dipendenti_id = $request->input('dipendenti_id');
         $calendario->commessa_id = $request->input('commessa_id');
+        $calendario->n_ore = $request->input('n_ore');
+        $calendario->giorno = $request->input('giorno');
 
         try{
         $calendario->save();

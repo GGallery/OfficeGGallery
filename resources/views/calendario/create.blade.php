@@ -31,13 +31,23 @@
     </div>
 
 
+    <div class="form-group">
+        {{ Form::label('n_ore', 'Numero ore:') }}
+        {{ Form::text('n_ore', null, ['class' => 'form-control', 'placeholder' => 'per le mezzore inserisci  ,5']) }}
+    </div>
+
+
+    <div class="form-group">
+        {{ Form::label('giorno', 'Giorno:') }}
+        {{ Form::text('giorno', null, ['class' => 'form-control']) }}
+    </div>
+
 
     <div class="form-group">
         {{ Form::label('commessa_id_text', 'Commessa:') }}
+        {{ Form::text('commessa_id_text', null, ['class' => 'form-control', 'placeholder' => 'Inzia a scrivere la commessa e scegliene solo dall\'elenco']) }}
+        {{ Form::hidden('commessa_id', null, ['id'=>'commessa_id' ,  'class' => 'form-control'  ]) }}
 
-
-        {{ Form::text('commessa_id_text', null, ['class' => 'form-control']) }}
-        {{ Form::hidden('commessa_id', null, ['id'=>'commessa_id' ,  'class' => 'form-control']) }}
     </div>
 
 
@@ -54,21 +64,12 @@
         
 @section('script')
 
-<script type="text/javascript">
-
-
-console.log(APP_URL);
-</script>
-
-
 
    <script type="text/javascript">
 
             $( document ).ready(function() 
             {
-             //   var APP_URL = {{ json_encode(url('/')) };
-              //  console.log(APP_URL);
-
+             
                 $("#commessa_id_text").autocomplete({
                     source: APP_URL+"/autocomplete/commesse",
                     minLength: 3,
@@ -77,6 +78,21 @@ console.log(APP_URL);
                         $('#commessa_id').val(ui.item.id);
                     }
                 });
+
+
+
+
+    $( "#giorno" ).datepicker({
+
+
+dateFormat: "dd-mm-yy",
+changeMonth: true,
+changeYear: true 
+
+    });
+    
+
+
             });
 
 
