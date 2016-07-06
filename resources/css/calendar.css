@@ -26,3 +26,20 @@ and open the template in the editor.
 .heigh6 {
      height: 300px;
 }
+
+
+#calendario .panel {
+    margin-bottom: 0px !important;
+}
+
+#calendario .panel-heading{
+	padding: 1px 1px !important;;
+}
+
+#calendario .panel-body{
+	padding: 1px !important;
+}
+
+#calendario .panel-title{
+	font-size: 10px !important;
+}

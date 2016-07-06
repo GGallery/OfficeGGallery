@@ -91,6 +91,8 @@ class commesseController extends Controller {
      */
     public function destroy($id) {
         //
+
+        echo "ok";
     }
 
 }

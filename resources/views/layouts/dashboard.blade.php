@@ -268,6 +268,16 @@
                         <a href="{{ url ('commesse') }}"><i class="fa fa-dribbble  fa-fw"></i>Commesse</a>
                     </li>
 
+                    <li {{ (Request::is('*Calendario') ? 'class="active"' : '') }}>
+                        <a href="{{ url ('calendario') }}"><i class="fa fa-dribbble  fa-fw"></i>Inserisci commessa</a>
+                    </li>
+
+
+
+                     <li {{ (Request::is('*calendar') ? 'class="active"' : '') }}>
+                        <a href="{{ url ('calendar') }}"><i class="fa fa-dribbble  fa-fw"></i>Calendario</a>
+                    </li>
+
                     
                     
                     
@@ -285,7 +295,10 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">@yield('page_heading')</h1>
+                <h1 class="page-header">@yield('page_heading')
+                <div class="pull-right">@yield('action_button')</div>
+</h1>
+                
             </div>
             <!-- /.col-lg-12 -->
         </div>

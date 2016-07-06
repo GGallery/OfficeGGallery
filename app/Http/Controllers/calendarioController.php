@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\calendario;
+use Carbon\Carbon;
 
 class calendarioController extends Controller {
 
@@ -112,5 +114,47 @@ class calendarioController extends Controller {
     public function destroy($id) {
         //
     }
+
+
+
+    public function calendar(Request $request)
+    {
+
+\Debugbar::info($request['giorno']);
+
+        if($request['giorno'])    
+        $data =  $request['giorno'];
+            else
+        $data = Carbon::today()->toDateString();
+
+
+$fromDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->toDateString(); // or ->format(..)
+$tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays(6)->toDateString();
+
+\Debugbar::info($fromDate);
+\Debugbar::info($tillDate);
+
+
+for ($i=0; $i <6 ; $i++) { 
+        $tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->toDateString(); 
+
+
+        $d = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y'); 
+
+        $settimana[$d] = calendario::where('dipendenti_id' , \Auth()->user()->id)
+        ->where( 'giorno' ,  $tillDate )
+        ->with('commessa')
+        ->take(10)
+        ->get();
+        
+}
+
+
+    
+        return view('calendario.calendar', compact('settimana'));
+
+    }
+
+
 
 }

@@ -17,6 +17,10 @@ class commesse extends Model
     public function clienti(){
         return $this->belongsTo('App\Clienti' , 'cliente_id');
     }
+
+    public function calendario(){
+        return $this->hasMany('App\Calendario' , 'commessa_id');
+    }
     
     public function lista(){
         $search =   Input::get('search');

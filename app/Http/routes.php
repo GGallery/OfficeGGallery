@@ -75,11 +75,11 @@ Route::group(array('before' => 'auth'), function() {
 
     Route::resource('dipendenti', 'dipendentiController');
     Route::resource('commesse', 'commesseController');
+    
+
     Route::resource('calendario', 'calendarioController');
 
-    Route::get('calendario.calendar', function() {
-        return View::make('calendario.calendar');
-    });
+    Route::resource('calendar', 'calendarioController@calendar');
     
 
     //AUTOCOMPLETE 
