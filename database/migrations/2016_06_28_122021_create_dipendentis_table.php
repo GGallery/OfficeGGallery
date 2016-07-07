@@ -11,7 +11,7 @@ class CreateDipendentisTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('cm_dipendenti', function(Blueprint $table) {
+        Schema::create('user', function(Blueprint $table) {
             $table->increments('id');
             $table->string('cognome');
             $table->string('nome');
