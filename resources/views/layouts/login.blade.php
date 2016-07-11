@@ -27,12 +27,9 @@
 
 
 
-        <script>var APP_URL = {
-                {
-                    json_encode(url('/'))
-                }
-            }
-            ;</script>
+        <script>var APP_URL = {{ json_encode(url('/')) }} ;
+        
+        </script>
         <script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
         <script src="//codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
 

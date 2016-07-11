@@ -19,7 +19,6 @@ class calendarioController extends Controller {
         //
         \Debugbar::info('index');
         return view('calendario.create');
-        
     }
 
     /**
@@ -30,9 +29,12 @@ class calendarioController extends Controller {
     public function create() {
         //
         \Debugbar::info('create');
-         return view('calendario.create');
+        return view('calendario.create');
     }
-
+    
+    
+    
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -42,7 +44,7 @@ class calendarioController extends Controller {
     public function store(Request $request) {
         // 
         \Debugbar::info('store');
-        
+
         $this->validate($request, [
             'dipendenti_id' => 'required'
             , 'commessa_id' => 'required'
@@ -62,12 +64,11 @@ class calendarioController extends Controller {
         $calendario->n_ore = $request->input('n_ore');
         $calendario->giorno = $request->input('giorno');
 
-        try{
-        $calendario->save();
-            }
-        catch(Exception $e){
-             // do task when error
-             \Debugbar::addException($e);
+        try {
+            $calendario->save();
+        } catch (Exception $e) {
+            // do task when error
+            \Debugbar::addException($e);
         }
 
 
@@ -115,46 +116,49 @@ class calendarioController extends Controller {
         //
     }
 
+    public function calendar(Request $request) {
+
+        \Debugbar::info($request['giorno']);
+
+        if ($request['giorno'])
+            $data = $request['giorno'];
+        else
+            $data = Carbon::today()->toDateString();
 
 
-    public function calendar(Request $request)
-    {
+        $fromDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->toDateString(); // or ->format(..)
+        $tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays(6)->toDateString();
 
-\Debugbar::info($request['giorno']);
-
-        if($request['giorno'])    
-        $data =  $request['giorno'];
-            else
-        $data = Carbon::today()->toDateString();
+        \Debugbar::info($fromDate);
+        \Debugbar::info($tillDate);
 
 
-$fromDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->toDateString(); // or ->format(..)
-$tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays(6)->toDateString();
-
-\Debugbar::info($fromDate);
-\Debugbar::info($tillDate);
+        for ($i = 0; $i < 6; $i++) {
+            $tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->toDateString();
 
 
-for ($i=0; $i <6 ; $i++) { 
-        $tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->toDateString(); 
+            $d = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y');
+
+            $settimana[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
+                    ->where('giorno', $tillDate)
+                    ->with('commessa')
+                    ->take(10)
+                    ->get();
+        }
 
 
-        $d = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y'); 
 
-        $settimana[$d] = calendario::where('dipendenti_id' , \Auth()->user()->id)
-        ->where( 'giorno' ,  $tillDate )
-        ->with('commessa')
-        ->take(10)
-        ->get();
+        return view('calendario.calendar', compact('settimana'));
+    }
+    
+    
+    public function feriepermessi() {
+        //
         
-}
-
+        return view('calendario.feriepermessi');
+    }
+    
 
     
-        return view('calendario.calendar', compact('settimana'));
-
-    }
-
-
 
 }

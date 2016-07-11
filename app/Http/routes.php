@@ -80,6 +80,8 @@ Route::group(array('before' => 'auth'), function() {
     Route::resource('calendario', 'calendarioController');
 
     Route::resource('calendar', 'calendarioController@calendar');
+    Route::resource('feriepermessi', 'calendarioController@feriepermessi');
+    
     
 
     //AUTOCOMPLETE 

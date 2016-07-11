@@ -7,10 +7,6 @@
                     <a href="commesse/destroy?id=255"> 
                      <span class="glyphicon glyphicon-trash pull-right" aria-hidden="true"></span>
                      </a>    
- {{ Form::open([  'method' => 'DELETE', 'route' => ['commesse.destroy', $pup->id] ]) }}  
- {{ Form::submit('Cancella', ['class' => 'btn btn-danger']) }}  
- {{ Form::close() }} 
-
 
 
                     </h3>

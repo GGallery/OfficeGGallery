@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Inserisci commessa')
+@section('page_heading','Ferie e Permessi')
 
 
 @section('section')
@@ -27,9 +27,10 @@
 
     
     <div class="form-group">
-        {{ Form::label('commessa_id_text', 'Commessa:') }}
-        {{ Form::text('commessa_id_text', null, ['class' => 'form-control', 'placeholder' => 'Inizia a scrivere 3 lettere e scegliene solo dall\'elenco']) }}
-        {{ Form::hidden('commessa_id', null, ['id'=>'commessa_id' ,  'class' => 'form-control'  ]) }}
+        {{ Form::label('n_ore', 'Ferie:') }}
+        {{ Form::radio('commessa_id', 1, ['id'=>'commessa_id' ,  'class' => 'form-control'  ]) }}
+        {{ Form::label('n_ore', 'Permessi:') }}
+        {{ Form::radio('commessa_id', 2, ['id'=>'commessa_id' ,  'class' => 'form-control'  ]) }}
 
     </div>
 

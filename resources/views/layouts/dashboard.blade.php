@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url ('') }}">GalleryGroup Admin Panel</a>
+            <a class="navbar-brand" href="{{ url ('') }}">GGallery Admin Panel</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -239,15 +239,17 @@
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
 
-                            {{ Form::open(['method'=>'GET','url'=>'commesse','class'=>'navbar-form navbar-left','role'=>'search'])  }}
-                            <input name="search" type="text" class="form-control" placeholder="Cerca commessa   ">
-
+                            {{ Form::open(['method'=>'GET','url'=>'commesse','class'=>'navbar-form navbar-left form-inline','role'=>'search'])  }}
+                            <div class="form-group">
                             <span class="input-group-btn">
+                                <input name="search" type="text" class="form-control" placeholder="Cerca commessa">
+
+                            
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-
+                            </div>
                             {{ Form::close()  }}
 
 
@@ -269,15 +271,21 @@
                     </li>
 
                     <li {{ (Request::is('*Calendario') ? 'class="active"' : '') }}>
-                        <a href="{{ url ('calendario') }}"><i class="fa fa-dribbble  fa-fw"></i>Inserisci commessa</a>
+                        <a href="{{ url ('calendario') }}"><i class="fa fa-plus-square-o fa-fw"></i>Inserisci commessa</a>
+                    </li>
+
+                    
+                     <li {{ (Request::is('*feriepermessi') ? 'class="active"' : '') }}>
+                        <a href="{{ url ('feriepermessi') }}"><i class="fa fa-calendar fa-fw"></i>Ferie e Permessi</a>
                     </li>
 
 
 
                      <li {{ (Request::is('*calendar') ? 'class="active"' : '') }}>
-                        <a href="{{ url ('calendar') }}"><i class="fa fa-dribbble  fa-fw"></i>Calendario</a>
+                        <a href="{{ url ('calendar') }}"><i class="fa fa-calendar fa-fw"></i>Calendario mie commesse</a>
                     </li>
 
+                    
                     
                     
                     

@@ -6,13 +6,17 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\dipendenti;
+use App\user;
 
 class dipendentiController extends Controller {
 
     //
     public function index() {
 
-        $data = dipendenti::with('societa')->get();
+        $data = user::with('societa')->get();
+        
+        
+        
         return view('dipendenti.index', compact('data'));
     }
 
