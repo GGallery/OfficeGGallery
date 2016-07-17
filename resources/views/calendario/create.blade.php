@@ -45,7 +45,7 @@
 
     <div class="form-group">
         {{ Form::label('commessa_id_text', 'Commessa:') }}
-        {{ Form::text('commessa_id_text', null, ['class' => 'form-control', 'placeholder' => 'Inzia a scrivere la commessa e scegliene solo dall\'elenco']) }}
+        {{ Form::text('commessa_id_text', null, ['id'=>'commessa_id_text', 'class' => 'form-control', 'placeholder' => 'Inzia a scrivere la commessa e scegliene solo dall\'elenco']) }}
         {{ Form::hidden('commessa_id', null, ['id'=>'commessa_id' ,  'class' => 'form-control'  ]) }}
 
     </div>

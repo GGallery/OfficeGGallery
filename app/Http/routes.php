@@ -80,6 +80,8 @@ Route::group(array('before' => 'auth'), function() {
     Route::resource('calendario', 'calendarioController');
 
     Route::resource('calendar', 'calendarioController@calendar');
+
+    Route::resource('google', 'googleController@index');
     
 
     //AUTOCOMPLETE 
@@ -87,13 +89,29 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('autocomplete', function() {
         return View::make('autocomplete');
     });
+
+
+
+    Route::get('sendmail', function(){
+
+            $data['dato'] = "niente";
+
+            echo Mail::send('emails.welcome', $data, function ($message) {
+            $message->from('antonio@ggallery.it', 'Laravel');
+            $message->to('tony@bslt.it');
+            });
+
+    });
+
+
+
 });
 
 
-Route::filter('auth', function() {
-    if (Auth::guest())
-        return Redirect::to('login');
-});
+//Route::filter('auth', function() {
+//    if (Auth::guest())
+//        return Redirect::to('login');
+//});
 
 
 Route::get('login', 'Auth\AuthController@getLogin');
@@ -104,4 +122,6 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 
 Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
+
+
 

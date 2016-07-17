@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 use App\calendario;
 use Carbon\Carbon;
 
+
+use Spatie\GoogleCalendar\Event;
+
+
 class calendarioController extends Controller {
 
     /**
@@ -54,6 +58,7 @@ class calendarioController extends Controller {
             , 'n_ore.required' => 'Inserisci il numero di ore'
             , 'giorno.required' => 'Insrisci il giorno'
         ]);
+        try{
 
         $calendario = new \App\calendario();
 
@@ -61,9 +66,26 @@ class calendarioController extends Controller {
         $calendario->commessa_id = $request->input('commessa_id');
         $calendario->n_ore = $request->input('n_ore');
         $calendario->giorno = $request->input('giorno');
+        $calendario->approved = -1;
 
-        try{
+       
+        
+
+        $event = new Event;
+        $event->name = "[".$request->input('commessa_id')."] ". $request->input('commessa_id_text');
+        $event->startDateTime = Carbon::now();
+        $event->endDateTime = Carbon::now()->addHour();
+        $gce = $event->save();
+
+
+        $calendario->google_cal_id = $gce->id;
         $calendario->save();
+
+
+        
+
+
+
             }
         catch(Exception $e){
              // do task when error
