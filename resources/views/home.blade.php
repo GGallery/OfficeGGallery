@@ -111,12 +111,12 @@
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                    <p><small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via Twitter</small>
+                                    <h4 class="timeline-title">Ferie Antonio Giangravè</h4>
+                                    <p><small class="text-muted"><i class="fa fa-clock-o"></i> Il giorno 13/06/2016 </small>
                                     </p>
                                 </div>
                                 <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis.</p>
+                                    
                                 </div>
                             </div>
                         </li>
@@ -125,11 +125,22 @@
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                    <h4 class="timeline-title">Nuova commessa</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia repellendus.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium maiores odit qui est tempora eos, nostrum provident explicabo dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
+                                    <p>E' stata aggiunta la commessa G-158 riferita al progetto Levati sulla manutrizione in eta pediatrica</p>
+                                </div>
+                            </div>
+                        </li>
+                         <li class="">
+                            <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Attenzione!</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>La giornata a stella non si terrà per brutto tempo<p>
                                 </div>
                             </div>
                         </li>
