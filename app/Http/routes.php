@@ -92,10 +92,10 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 
-Route::filter('auth', function() {
-    if (Auth::guest())
-        return Redirect::to('login');
-});
+#Routesute::filter('auth', function() {
+#    if (Auth::guest())
+#        return Redirect::to('login');
+#});
 
 
 Route::get('login', 'Auth\AuthController@getLogin');
