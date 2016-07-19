@@ -16,12 +16,12 @@ class CmCalendario extends Migration
         Schema::create('cm_calendario', function(Blueprint $table){
             $table->increments('id');
             $table->integer('dipendenti_id')->unsigned();
-            $table->foreign('dipendenti_id')->references('id')->on('user');
+            $table->foreign('dipendenti_id')->references('id')->on('users');
             $table->string('giorno');
             $table->integer('commessa_id')->unsigned();
             $table->foreign('commessa_id')->references('id')->on('cm_commesse');
             $table->integer('n_ore');
-            $table->boolean('straordinario');
+            $table->integer('straordinario');
             $table->timestamps();
         });
     }
