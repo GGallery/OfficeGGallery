@@ -27,7 +27,7 @@ class commesseController extends Controller {
         $commesse = new \App\commesse();
                 
         $data = $commesse->lista();
-        
+
         return view('commesse.index', compact('data'));
         
         

@@ -12,16 +12,19 @@
  */
 
 Route::group(array('before' => 'auth'), function() {
-
+//Route::group( 'middleware' => ['auth.basic', 'auth.admin']), function() {
 
     Route::get('/', function() {
-        return View::make('home');
+        //return View::make('home');
+       if (Auth::guest())
+        return Redirect::to('login');
+
+    return View::make('home');
+        
     });
     Route::get('home', function() {
         return View::make('home');
     });
-    
-
 
     Route::get('/charts', function() {
         return View::make('mcharts');
