@@ -49,7 +49,7 @@
 
         {{ Form::open([
         'method' => 'DELETE',
-        'route' => ['dipendenti.destroy', $datiRecuperati['id']]
+        'route' => ['users', $datiRecuperati['id']]
         ]) }}
         {{ Form::submit('Cancella', ['class' => 'btn btn-danger']) }}
         {{ Form::close() }}

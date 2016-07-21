@@ -11,17 +11,15 @@
   |
  */
 
-Route::group(array('before' => 'auth'), function() {
-//Route::group( 'middleware' => ['auth.basic', 'auth.admin']), function() {
+Route::group(array('middleware' => 'auth'), function() {
+
 
     Route::get('/', function() {
-        //return View::make('home');
-       if (Auth::guest())
-        return Redirect::to('login');
+            return View::make('home');
+        });
 
-    return View::make('home');
-        
-    });
+
+
     Route::get('home', function() {
         return View::make('home');
     });
@@ -76,7 +74,7 @@ Route::group(array('before' => 'auth'), function() {
     });
 
 
-    Route::resource('dipendenti', 'dipendentiController');
+    Route::resource('users', 'usersController');
     Route::resource('commesse', 'commesseController');
     
 
@@ -95,17 +93,19 @@ Route::group(array('before' => 'auth'), function() {
 });
 
 
-#Routesute::filter('auth', function() {
-#    if (Auth::guest())
-#        return Redirect::to('login');
-#});
+
+//    Route::get('/', [
+//        'middleware' => 'roles' ,
+//        'roles' => 'Users',
+//        function() {
+//            return View::make('home');
+//        }]);
+//
 
 
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
-
-
 
 Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');

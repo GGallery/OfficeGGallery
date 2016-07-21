@@ -263,7 +263,7 @@
                                             <ul class="nav nav-second-level">-->
                     
                     <li {{ (Request::is('*Dipendenti') ? 'class="active"' : '') }}>
-                        <a href="{{ url ('dipendenti') }}"><i class="fa fa-user fa-fw"></i>Dipendenti</a>
+                        <a href="{{ url ('users') }}"><i class="fa fa-user fa-fw"></i>Dipendenti</a>
                     </li>
 
                     <li {{ (Request::is('*Commesse') ? 'class="active"' : '') }}>

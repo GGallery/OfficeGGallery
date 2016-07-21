@@ -4,25 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DebugBar\DebugBar;
 use Illuminate\Http\Request;
-use App\dipendenti;
-use App\user;
+use App\User;
 
-class dipendentiController extends Controller {
+class usersController extends Controller {
 
     //
     public function index() {
 
-        $data = user::with('societa')->get();
-        
-        
-        
-        return view('dipendenti.index', compact('data'));
+        $data = User::with('societa')->get();
+
+        \Debugbar::info(compact($data));
+
+        return view('users.index', compact('data'));
     }
 
     public function edit($id) {
-        $data['datiRecuperati'] = \App\dipendenti::find($id);
-        return view('dipendenti.edit', $data);
+
+        $data['datiRecuperati'] = User::first();
+
+        return view('users.edit', compact($data));
     }
 
     public function update(Request $request, $id) {
@@ -37,14 +39,14 @@ class dipendentiController extends Controller {
             , 'email.email' => 'L\'email non è in formato corretto'
         ]);
 
-        $dipendente = \App\dipendenti::find($id);
+        $dipendente = \App\User::find($id);
         $dipendente->nome = $request->input('nome');
         $dipendente->cognome = $request->input('cognome');
         $dipendente->email = $request->input('email');
 
         $dipendente->save();
 
-        return redirect('dipendenti')->with('ok_message', 'La tua rubrica è stata aggiornata');
+        return redirect('users')->with('ok_message', 'La tua rubrica è stata aggiornata');
     }
 
 }
