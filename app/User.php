@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function hasRole($role)
     {
-        if($this->roles()->where('name', $role->first())){
+        if($this->roles()->where('name', $role)){
             return true;
         }
         return false;

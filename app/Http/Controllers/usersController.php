@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
 
 class usersController extends Controller {
 
@@ -14,17 +15,18 @@ class usersController extends Controller {
     public function index() {
 
         $data = User::with('societa')->get();
-
-        \Debugbar::info(compact($data));
-
         return view('users.index', compact('data'));
     }
 
     public function edit($id) {
 
-        $data['datiRecuperati'] = User::first();
+        $data['datiRecuperati'] = User::with('roles')->find($id);
 
-        return view('users.edit', compact($data));
+//        \Debugbar::info($data['datiRecuperati']->roles()->);
+
+        $data['userType'] = Role::lists('name', 'id');
+        return view('users.edit', $data);
+
     }
 
     public function update(Request $request, $id) {
@@ -45,6 +47,12 @@ class usersController extends Controller {
         $dipendente->email = $request->input('email');
 
         $dipendente->save();
+
+        if($request->input('auth')) {
+            $dipendente->roles()->detach();
+            $dipendente->roles()->attach(Role::where('id', $request->input('auth'))->first());
+        }
+
 
         return redirect('users')->with('ok_message', 'La tua rubrica è stata aggiornata');
     }
