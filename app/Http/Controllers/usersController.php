@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use App\User;
-use App\Role;
+use App\Usergroups;
+
+
 
 class usersController extends Controller {
 
@@ -20,11 +22,15 @@ class usersController extends Controller {
 
     public function edit($id) {
 
-        $data['datiRecuperati'] = User::with('roles')->find($id);
+        $data['datiRecuperati'] = User::find($id);
 
-//        \Debugbar::info($data['datiRecuperati']->roles()->);
+        $data['leader'] = User::with(['groups' =>function ($query){
+                $query->where('group_id','=' , 3);
+        }])->lists('nome', 'id');
 
-        $data['userType'] = Role::lists('name', 'id');
+        $usergroups = new Usergroups();
+        $data['usergroups'] = $usergroups->getTree();
+
         return view('users.edit', $data);
 
     }
@@ -48,10 +54,14 @@ class usersController extends Controller {
 
         $dipendente->save();
 
-        if($request->input('auth')) {
-            $dipendente->roles()->detach();
-            $dipendente->roles()->attach(Role::where('id', $request->input('auth'))->first());
-        }
+        \Debugbar::info($request->input('groups'));
+
+
+            $dipendente->groups()->detach();
+            foreach ($request->input('groups') as $group) {
+                $dipendente->groups()->attach(Usergroups::where('id', $group)->first());
+            }
+
 
 
         return redirect('users')->with('ok_message', 'La tua rubrica è stata aggiornata');

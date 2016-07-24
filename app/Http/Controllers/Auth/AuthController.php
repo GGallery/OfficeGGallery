@@ -7,7 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use App\Role;
+use App\Usergroups;
 
 class AuthController extends Controller
 {
@@ -74,7 +74,7 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $user->roles()->attach(Role::where('name', 'User')->first());
+        $user->roles()->attach(Usergroups::where('name', 'User')->first());
 
         return $user;
 

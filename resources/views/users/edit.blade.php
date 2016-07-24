@@ -36,13 +36,25 @@
             {{ Form::text('email', null, ['class' => 'form-control']) }}
         </div>
 
-            @if(Auth::user()->hasAnyRoles('Admin'))
         <div class="form-group">
-            {{ Form::label('auth', 'Livello utente:') }}
+                {{ Form::label('referente_id', 'Referente:') }}
 
-            {{ Form::select('auth', $userType, null, ['class' => 'form-control']) }}
-        </div>
+                {{ Form::select('referente_id', $leader,null ,['class' => 'form-control']) }}
+            </div>
+
+
+
+        @if(Auth::user()->hasAnyGroups('Admin'))
+                {{ Form::label('Autorizzazioni', 'Gruppi:') }}
+                <div class='form-group'>
+                    @foreach ($usergroups as $key => $val)
+                        <br>
+                        {{ Form::checkbox('groups[]', $key) }}
+                        {{ Form::label('groups', $val) }}
+                    @endforeach
+                </div>
             @endif
+
 
         <div class="pull-right">
             {{ Form::submit('aggiorna', ['class' => 'btn btn-success']) }}

@@ -16,14 +16,18 @@ class CreateUsersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('email')->unique();
-			$table->string('password', 60);
-			$table->rememberToken();
+            $table->string('nome');
+            $table->string('cognome');
+            $table->string('email')->unique();
+            $table->string('password', 60);
+            $table->integer('societa_id')->unsigned();
+            $table->foreign('societa_id')->references('id')->on('cm_societa');
+            $table->rememberToken();
 			$table->timestamps();
 		});
 	}
 
-	/**
+    /**
 	 * Reverse the migrations.
 	 *
 	 * @return void

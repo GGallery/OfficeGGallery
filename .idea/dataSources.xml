@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="4004089160">
+  <component name="DataSourceManagerImpl" format="xml" hash="580802229">
     <data-source source="LOCAL" name="MySQL - officegg_db@31.14.141.98" uuid="f393311f-948a-4ddc-b948-200f2483eccf">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>

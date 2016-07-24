@@ -41,37 +41,39 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    public function roles()
+    public function groups()
     {
-        return $this->belongsToMany('\App\Role' , 'user_roles' , 'user_id', 'role_id' );
+        return $this->belongsToMany('\App\Usergroups' , 'user_group' , 'user_id', 'group_id' );
     }
 
-    public function hasAnyRoles($roles)
+    public function hasAnyGroups($groups)
     {
-        if(is_array($roles))
+        if(is_array($groups))
             {
-            foreach ($roles as $role) {
-                if($this->hasRole($role))
+            foreach ($groups as $group) {
+                if($this->hasGroup($group))
                 return true;
             }
         }
         else
             {
-              if($this->hasRole($roles))
-                return true;   
+              if($this->hasGroup($groups))
+                return true;
             }
     return false;
     }
 
 
-    public function hasRole($role)
+    public function hasGroup($group)
     {
-        if($this->roles()->where('name', $role)){
+        if($this->groups()->where('name', $group)){
             return true;
         }
         return false;
     }
 
+//
+//
 
 
 
