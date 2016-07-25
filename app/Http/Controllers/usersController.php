@@ -24,9 +24,10 @@ class usersController extends Controller {
 
         $data['datiRecuperati'] = User::find($id);
 
-        $data['leader'] = User::with(['groups' =>function ($query){
-                $query->where('group_id','=' , 3);
-        }])->lists('nome', 'id');
+        $data['leader'] = User::whereHas('groups', function($q)
+        {
+            $q->where('group_id','=' , 3); //gruppo tutor
+        })->lists('nome', 'id');
 
         $usergroups = new Usergroups();
         $data['usergroups'] = $usergroups->getTree();
@@ -40,27 +41,29 @@ class usersController extends Controller {
             'nome' => 'required'
             , 'cognome' => 'required'
             , 'email' => 'required|email'
-                ], [
+        ], [
             'nome.required' => 'Il nome è obbligatorio!'
             , 'cognome.required' => 'Per favore, anche il cognome'
             , 'email.required' => 'E l\'email è importante'
             , 'email.email' => 'L\'email non è in formato corretto'
         ]);
 
-        $dipendente = \App\User::find($id);
-        $dipendente->nome = $request->input('nome');
-        $dipendente->cognome = $request->input('cognome');
-        $dipendente->email = $request->input('email');
+        $user = \App\User::find($id);
+        $user->nome = $request->input('nome');
+        $user->cognome = $request->input('cognome');
+        $user->email = $request->input('email');
 
-        $dipendente->save();
+        $user->save();
 
         \Debugbar::info($request->input('groups'));
 
 
-            $dipendente->groups()->detach();
+        if($request->input('groups')) {
+            $user->groups()->detach();
             foreach ($request->input('groups') as $group) {
-                $dipendente->groups()->attach(Usergroups::where('id', $group)->first());
+                $user->groups()->attach(Usergroups::where('id', $group)->first());
             }
+        }
 
 
 

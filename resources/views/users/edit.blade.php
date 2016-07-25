@@ -37,23 +37,23 @@
         </div>
 
         <div class="form-group">
-                {{ Form::label('referente_id', 'Referente:') }}
+            {{ Form::label('referente_id', 'Referente:') }}
 
-                {{ Form::select('referente_id', $leader,null ,['class' => 'form-control']) }}
-            </div>
+            {{ Form::select('referente_id', $leader,null ,['class' => 'form-control']) }}
+        </div>
 
 
 
         @if(Auth::user()->hasAnyGroups('Admin'))
-                {{ Form::label('Autorizzazioni', 'Gruppi:') }}
-                <div class='form-group'>
-                    @foreach ($usergroups as $key => $val)
-                        <br>
-                        {{ Form::checkbox('groups[]', $key) }}
-                        {{ Form::label('groups', $val) }}
-                    @endforeach
-                </div>
-            @endif
+            {{ Form::label('Autorizzazioni', 'Gruppi:') }}
+            <div class='form-group'>
+                @foreach ($usergroups as $key => $val)
+                    <br>
+                    {{ Form::checkbox('groups[]', $key) }}
+                    {{ Form::label('groups', $val) }}
+                @endforeach
+            </div>
+        @endif
 
 
         <div class="pull-right">

@@ -34,7 +34,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-    
+
     public function societa() {
 
         return $this->belongsTo('App\Societa');
@@ -49,24 +49,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function hasAnyGroups($groups)
     {
         if(is_array($groups))
-            {
+        {
             foreach ($groups as $group) {
                 if($this->hasGroup($group))
-                return true;
+                    return true;
             }
         }
         else
-            {
-              if($this->hasGroup($groups))
+        {
+            if($this->hasGroup($groups))
                 return true;
-            }
-    return false;
+        }
+        return false;
     }
 
 
     public function hasGroup($group)
     {
-        if($this->groups()->where('name', $group)){
+        $chk = $this->groups()->where('name', $group)->first();
+        \Debugbar::info($group);
+        \Debugbar::info($chk);
+        if($chk){
             return true;
         }
         return false;
