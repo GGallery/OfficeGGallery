@@ -8,6 +8,7 @@ use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use App\User;
 use App\Usergroups;
+use \App\Societa;
 
 
 
@@ -16,13 +17,15 @@ class usersController extends Controller {
     //
     public function index() {
 
-        $data = User::with('societa')->get();
+        $data = User::with('societa')->orderBy('cognome')->get();
         return view('users.index', compact('data'));
     }
 
     public function edit($id) {
 
         $data['datiRecuperati'] = User::find($id);
+
+        $data['societa'] = Societa::lists('societa', 'id');
 
         $data['leader'] = User::whereHas('groups', function($q)
         {

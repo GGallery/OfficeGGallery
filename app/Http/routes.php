@@ -79,6 +79,8 @@ Route::group(array('middleware' => 'auth'), function() {
     
 
     Route::resource('calendario', 'calendarioController');
+    Route::resource('calendario.destroy', 'calendarioController@destroy');
+
 
     Route::resource('calendar', 'calendarioController@calendar');
     Route::resource('feriepermessi', 'calendarioController@feriepermessi');

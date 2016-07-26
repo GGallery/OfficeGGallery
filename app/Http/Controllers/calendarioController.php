@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\calendario;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class calendarioController extends Controller {
 
@@ -17,8 +18,11 @@ class calendarioController extends Controller {
      */
     public function index() {
         //
-        \Debugbar::info('index');
-        return view('calendario.create');
+        $data['mostUsed'] = calendario::where('dipendenti_id',  Auth::user()->id)
+            ->orderBy('giorno', 'desc')
+            ->distinct()
+            ->get(['commessa_id']);
+        return view('calendario.create', $data);
     }
 
     /**
@@ -28,13 +32,16 @@ class calendarioController extends Controller {
      */
     public function create() {
         //
-        \Debugbar::info('create');
-        return view('calendario.create');
+        $data['mostUsed'] = calendario::where('dipendenti_id',  Auth::user()->id)
+            ->orderBy('giorno', 'desc')
+            ->distinct()
+            ->get(['commessa_id']);
+        return view('calendario.create', $data);
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -50,7 +57,7 @@ class calendarioController extends Controller {
             , 'commessa_id' => 'required'
             , 'n_ore' => 'required'
             , 'giorno' => 'required'
-                ], [
+        ], [
             'dipendenti_id.required' => 'dipendenti_id me lo devi dire'
             , 'commessa_id.required' => 'Se non mi dici per cosa è la commessa è inutile'
             , 'n_ore.required' => 'Inserisci il numero di ore'
@@ -64,12 +71,32 @@ class calendarioController extends Controller {
         $calendario->n_ore = $request->input('n_ore');
         $calendario->giorno = $request->input('giorno');
 
+
+        $tocheck=[1000, 1001, 1002, 1003];
+        in_array($calendario->commessa_id, $tocheck) ? $calendario->approvato = 0 : $calendario->approvato = 1 ;
+
         try {
             $calendario->save();
         } catch (Exception $e) {
-            // do task when error
             \Debugbar::addException($e);
         }
+
+
+        if(!$calendario->approvato)
+        {
+
+
+           $referente = \App\User::where('id', Auth::user()->referente_id)->first();
+
+            \Debugbar::info($referente->email);
+
+
+
+//            sendmail
+        }
+
+
+
 
 
         return redirect('calendario')->with('ok_message', 'Ok commessa aggiunta correttamente');
@@ -113,7 +140,8 @@ class calendarioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+        calendario::destroy($id);
+        return redirect('calendar')->with('ok_message', 'Eliminata');
     }
 
     public function calendar(Request $request) {
@@ -126,39 +154,43 @@ class calendarioController extends Controller {
             $data = Carbon::today()->toDateString();
 
 
-        $fromDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->toDateString(); // or ->format(..)
-        $tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays(6)->toDateString();
+        $fromDate = Carbon::createFromFormat('Y-m-d', $data)->startOfWeek()->toDateString(); // or ->format(..)
+        $tillDate = Carbon::createFromFormat('Y-m-d', $data)->startOfWeek()->addDays(6)->toDateString();
 
         \Debugbar::info($fromDate);
         \Debugbar::info($tillDate);
 
 
         for ($i = 0; $i < 6; $i++) {
-            $tillDate = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->toDateString();
+            $tillDate = Carbon::createFromFormat('Y-m-d', $data)->startOfWeek()->addDays($i)->toDateString();
 
-
-            $d = Carbon::createFromFormat('Y-m-d', $data)->subDay()->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y');
+            $d = Carbon::createFromFormat('Y-m-d', $data)->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y');
 
             $settimana[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
-                    ->where('giorno', $tillDate)
-                    ->with('commessa')
-                    ->take(10)
-                    ->get();
+                ->where('giorno', $tillDate)
+                ->with('commessa')
+                ->get();
+
+
+            $totore[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
+                ->where('giorno', $tillDate)
+                ->with('commessa')
+                ->sum('n_ore');
         }
 
 
 
-        return view('calendario.calendar', compact('settimana'));
+        return view('calendario.calendar', compact('settimana'), compact('totore'));
     }
-    
-    
+
+
     public function feriepermessi() {
         //
-        
+
         return view('calendario.feriepermessi');
     }
-    
 
-    
+
+
 
 }

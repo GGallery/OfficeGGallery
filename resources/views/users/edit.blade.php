@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Dipendenti')
+@section('page_heading','Dettaglio utente')
 
 @section('section')
 
@@ -20,40 +20,78 @@
         ['method' => 'put', 'url' =>'users/'. $datiRecuperati['id']])
         }}
 
-        <div class="form-group">
-            {{ Form::label('nome', 'Il tuo nome:') }}
-            {{ Form::text('nome', null, ['class' => 'form-control']) }}
-        </div>
+        <div class="row">
 
-        <div class="form-group">
-            {{ Form::label('cognome', 'Il tuo cognome:') }}
-            {{ Form::text('cognome', null, ['class' => 'form-control']) }}
-        </div>
-
-        <div class="form-group">
-            {{ Form::label('email', 'La tua email:') }}
-
-            {{ Form::text('email', null, ['class' => 'form-control']) }}
-        </div>
-
-        <div class="form-group">
-            {{ Form::label('referente_id', 'Referente:') }}
-
-            {{ Form::select('referente_id', $leader,null ,['class' => 'form-control']) }}
-        </div>
+            <div class="col-md-4">
 
 
 
-        @if(Auth::user()->hasAnyGroups('Admin'))
-            {{ Form::label('Autorizzazioni', 'Gruppi:') }}
-            <div class='form-group'>
-                @foreach ($usergroups as $key => $val)
-                    <br>
-                    {{ Form::checkbox('groups[]', $key) }}
-                    {{ Form::label('groups', $val) }}
-                @endforeach
+                <div class="form-group">
+                    {{ Form::label('nome', 'Nome:') }}
+                    {{ Form::text('nome', null, ['class' => 'form-control']) }}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label('cognome', 'Cognome:') }}
+                    {{ Form::text('cognome', null, ['class' => 'form-control']) }}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label('email', 'Email:') }}
+
+                    {{ Form::text('email', null, ['class' => 'form-control']) }}
+                </div>
+
+
             </div>
-        @endif
+
+
+
+            <div class="col-md-4">
+
+
+                <div class="form-group">
+                    {{ Form::label('societa_id', 'Società di appartenenza:') }}
+                    {{ Form::select('societa_id', $societa, null, ['class' => 'form-control' ,
+                          Auth::user()->hasAnyGroups('Admin')  ? '' : 'disabled'
+                    ]) }}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label('referente_id', 'Referente:') }}
+                    {{ Form::select('referente_id', $leader,null ,['class' => 'form-control' ,
+                    Auth::user()->hasAnyGroups('Admin')  ? '' : 'disabled'
+                    ]) }}
+                </div>
+
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                @if(Auth::user()->hasAnyGroups('Admin'))
+                    {{ Form::label('Autorizzazioni', 'Gruppi:') }}
+                    <div class='form-group'>
+                        @foreach ($usergroups as $key => $val)
+                            <br>
+                            {{ Form::checkbox('groups[]', $key) }}
+                            {{ Form::label('groups', $val) }}
+                        @endforeach
+                    </div>
+                @endif
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
 
 
         <div class="pull-right">

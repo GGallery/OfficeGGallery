@@ -21,6 +21,7 @@ class CmCalendario extends Migration
             $table->integer('commessa_id')->unsigned();
             $table->foreign('commessa_id')->references('id')->on('cm_commesse');
             $table->integer('n_ore');
+            $table->integer('approvato');
             $table->integer('straordinario');
             $table->timestamps();
         });

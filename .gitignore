@@ -3,3 +3,4 @@
 /node_modules
 /nbproject/private/
 !/bower_components/
+.idea/workspace.xml

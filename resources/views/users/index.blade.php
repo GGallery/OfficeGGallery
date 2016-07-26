@@ -6,14 +6,14 @@
 
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
 
 
         <table class="table table-striped">
 
             <thead>  <tr>  
-                    <th>Nome</th> 
-                    <th>Cognome</th> 
+                    <th>Cognome</th>
+                    <th>Nome</th>
                     <th>Email</th>  
                     <th>Societa</th>  
                     <th> </th>  
@@ -24,8 +24,8 @@
                 @foreach($data as $dip) 
 
                 <tr> 
-                    <td>{{ $dip->nome }}</td>
                     <td>{{ $dip->cognome }}</td>
+                    <td>{{ $dip->nome }}</td>
                     <td>{{ $dip->email }}</td>
                     <td>{{ $dip->societa->societa }}</td>
                     <td><a class="btn btn-warning" href="users/{{$dip->id}}/edit">modifica</a></td>
