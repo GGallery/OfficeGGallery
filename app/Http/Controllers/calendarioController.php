@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\calendario;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 
 class calendarioController extends Controller {
 
@@ -84,15 +85,14 @@ class calendarioController extends Controller {
 
         if(!$calendario->approvato)
         {
-
-
-           $referente = \App\User::where('id', Auth::user()->referente_id)->first();
+            $referente = \App\User::where('id', Auth::user()->referente_id)->first();
 
             \Debugbar::info($referente->email);
 
-
-
-//            sendmail
+            Mail::send('emails.approvazione', ['user' => $referente->nome], function ($m) use ($referente) {
+                $m->from('office@ggallery.it', 'G A P');
+                $m->to($referente->email, $referente->name)->subject('Richiesto intervento');
+            });
         }
 
 
