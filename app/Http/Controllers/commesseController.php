@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\commesse;
 use App\clienti;
+use App\User;
 
 class commesseController extends Controller {
 
@@ -16,21 +17,21 @@ class commesseController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        
+
         //$data = commesse::with('Clienti')->get();
 
-            //client_id
+        //client_id
         //952177561871-hm8l3lo1qdvrfofov433drj70e23l6aj.apps.googleusercontent.com
         //secret
         //3_R0EPdO7-XJAtvq-3Zsyz44
 
         $commesse = new \App\commesse();
-                
+
         $data = $commesse->lista();
 
         return view('commesse.index', compact('data'));
-        
-        
+
+
     }
 
     /**
@@ -39,7 +40,15 @@ class commesseController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+
+        $clienti_list = [''=>''] + clienti::lists('nome', 'id')->all();
+        $user= [''=>'']  +  user::orderBy('cognome')->lists('cognome', 'id')->all();
+        $commesse = commesse::where('abilitata', 1)->orderBy('id', 'desc')->get();
+
+        return view('commesse.new')
+            ->with('user', $user)
+            ->with('commesse', $commesse)
+            ->with('clienti_list', $clienti_list);
     }
 
     /**
@@ -50,6 +59,31 @@ class commesseController extends Controller {
      */
     public function store(Request $request) {
         //
+        $this->validate($request, [
+            'protocollo' => 'required'
+            , 'cliente_id' => 'required'
+            , 'oggetto' => 'required'
+            , 'stato' => 'required'
+            , 'referente' => 'required'
+        ], [
+            'protocollo.required' => 'Il protocollo è obbligatorio!'
+            , 'cliente_id.required' => 'Cliente'
+            , 'oggetto.required' => 'Oggetto'
+            , 'referente' => 'Referente'
+        ]);
+
+        $commessa = new commesse;
+        $commessa->protocollo= $request->input('protocollo');
+        $commessa->cliente_id= $request->input('cliente_id');
+        $commessa->oggetto= $request->input('oggetto');
+        $commessa->stato= $request->input('stato');
+        $commessa->referente= $request->input('referente');
+
+
+        $commessa->save();
+
+        return redirect('commesse')->with('ok_message', 'La tua commessa è stata inserita');
+
     }
 
     /**

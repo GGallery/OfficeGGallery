@@ -19,7 +19,7 @@
 
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
         <table class="table table-striped">
             <thead>  <tr>  
                     <th>id</th> 

@@ -22,6 +22,7 @@ class CreateCommesseTable extends Migration
             $table->string('stato');
             $table->string('referente');
             $table->string('colore');
+            $table->integer('abilitata');
             $table->integer('grafico');
             $table->timestamps();
             

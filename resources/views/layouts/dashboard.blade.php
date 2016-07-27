@@ -270,6 +270,11 @@
                         <a href="{{ url ('commesse') }}"><i class="fa fa-dribbble  fa-fw"></i>Commesse</a>
                     </li>
 
+                    <li {{ (Request::is('*Commesse') ? 'class="active"' : '') }}>
+                        <a href="{{ url ('commesse/create') }}"><i class="fa fa-dribbble  fa-fw"></i>Nuova Commesse</a>
+                    </li>
+
+
                     <li {{ (Request::is('*Calendario') ? 'class="active"' : '') }}>
                         <a href="{{ url ('calendario') }}"><i class="fa fa-plus-square-o fa-fw"></i>Inserisci commessa</a>
                     </li>

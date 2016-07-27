@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('page_heading','Dettaglio utente')
+@section('page_heading','Dipendenti')
 
 @section('section')
 
@@ -27,17 +27,17 @@
 
 
                 <div class="form-group">
-                    {{ Form::label('nome', 'Nome:') }}
+                    {{ Form::label('nome', 'Il tuo nome:') }}
                     {{ Form::text('nome', null, ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('cognome', 'Cognome:') }}
+                    {{ Form::label('cognome', 'Il tuo cognome:') }}
                     {{ Form::text('cognome', null, ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('email', 'Email:') }}
+                    {{ Form::label('email', 'La tua email:') }}
 
                     {{ Form::text('email', null, ['class' => 'form-control']) }}
                 </div>
@@ -52,16 +52,17 @@
 
                 <div class="form-group">
                     {{ Form::label('societa_id', 'Società di appartenenza:') }}
-                    {{ Form::select('societa_id', $societa, null, ['class' => 'form-control' ,
-                          Auth::user()->hasAnyGroups('Admin')  ? '' : 'disabled'
-                    ]) }}
+                    {{ Form::select('societa_id', $societa, null, ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group">
                     {{ Form::label('referente_id', 'Referente:') }}
                     {{ Form::select('referente_id', $leader,null ,['class' => 'form-control' ,
-                    Auth::user()->hasAnyGroups('Admin')  ? '' : 'disabled'
-                    ]) }}
+
+                    Auth::user()->hasAnyGroups('Admin')  ? '' :'disabled'
+
+
+                    , 'disabled' ]) }}
                 </div>
 
 
