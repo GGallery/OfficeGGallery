@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\commesse;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,7 @@ class calendarioController extends Controller {
     public function index() {
         //
         $data['mostUsed'] = calendario::where('dipendenti_id',  Auth::user()->id)
+            ->where('commessa_id', '<' ,10000) //escludo ferie e permessi
             ->orderBy('giorno', 'desc')
             ->distinct()
             ->get(['commessa_id']);
@@ -34,6 +36,7 @@ class calendarioController extends Controller {
     public function create() {
         //
         $data['mostUsed'] = calendario::where('dipendenti_id',  Auth::user()->id)
+            ->where('commessa_id', '<' ,10000) //escludo ferie e permessi
             ->orderBy('giorno', 'desc')
             ->distinct()
             ->get(['commessa_id']);
@@ -186,8 +189,12 @@ class calendarioController extends Controller {
 
     public function feriepermessi() {
         //
+        $data['commesse_ferie_permessi'] = commesse::where('id', '>=', 10000)
+            ->get();
 
-        return view('calendario.feriepermessi');
+
+        \Debugbar::info($data);
+        return view('calendario.feriepermessi', $data);
     }
 
 

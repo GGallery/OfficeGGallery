@@ -21,6 +21,7 @@ class autocompleteController extends Controller {
         $results = array();
 
         $queries = \DB::table('cm_commesse')
+                ->where('id', '<' ,10000) //escludo ferie e permessi
                 ->where('oggetto', 'LIKE', '%' . $term . '%')
                 ->orWhere('protocollo', 'LIKE', '%' . $term . '%')
                 ->get();

@@ -97,36 +97,18 @@
                 }
             });
 
-
             $(".mostUsed").click(function() {
                 $('#commessa_id_text').val($(this).attr("commessa_text"));
                 $('#commessa_id').val($(this).attr("commessa_id"));
 
             });
 
-
-
-
-
-
             $( "#giorno" ).datepicker({
                 dateFormat: "yy-mm-dd",
                 changeMonth: true,
                 changeYear: true
-
             });
-
-
-
-
-
-
-
-
-
         });
-
-
 
     </script>
 
