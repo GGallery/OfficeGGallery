@@ -45,6 +45,35 @@
         </div>
 
 
+        <div class="form-group">
+            {{ Form::label('type', 'Tipo:') }}
+            {{ Form::text('type_text', '-', ['class' => 'form-control selectWidth', 'id'=>'type_text']) }}
+            {{ Form::hidden('type', 0, ['class' => 'form-control']) }}
+        </div>
+
+        <div class="form-group">
+            {{Form::button('Regolare' ,[
+                     'type' => 0,
+                     'type_text' => 'Commessa normale',
+                      'class' => "btn btn-default type "
+                     ])}}
+
+            {{Form::button('Straordinario' ,[
+                     'type' => 1,
+                     'type_text' => 'Straordinario (da approvare)',
+                      'class' => "btn btn-danger type "
+                     ])}}
+
+            {{Form::button('Permesso+' ,[
+                     'type' => 2,
+                     'type_text' => 'Recupero+',
+                      'class' => "btn btn-warning  type"
+                     ])}}
+
+
+
+        </div>
+
 
 
 
@@ -101,6 +130,12 @@
                 $('#commessa_id_text').val($(this).attr("commessa_text"));
                 $('#commessa_id').val($(this).attr("commessa_id"));
 
+            });
+
+            $(".type").click(function(e) {
+                e.preventDefault();
+                $('#type_text').val($(this).attr("type_text"));
+                $('#type').val($(this).attr("type"));
             });
 
             $( "#giorno" ).datepicker({

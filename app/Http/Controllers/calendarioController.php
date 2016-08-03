@@ -74,10 +74,25 @@ class calendarioController extends Controller {
         $calendario->commessa_id = $request->input('commessa_id');
         $calendario->n_ore = $request->input('n_ore');
         $calendario->giorno = $request->input('giorno');
+        $calendario->type= $request->input('type');
 
 
-        $tocheck=[1000, 1001, 1002, 1003];
-        in_array($calendario->commessa_id, $tocheck) ? $calendario->approvato = 0 : $calendario->approvato = 1 ;
+
+
+        //        1 Straordinario **
+        //        2 Recupero+
+        //        3 Recupero- **
+        //        Permesso
+        //        Ferie
+
+        $typetocheck=[1, 3];
+        $commessatocheck=[10000,10001];
+
+        if(in_array($calendario->type, $typetocheck) || in_array($calendario->commessa_id, $commessatocheck))
+            $calendario->approvato = 0;
+        else
+            $calendario->approvato = 1 ;
+
 
         try {
             $calendario->save();
@@ -94,7 +109,8 @@ class calendarioController extends Controller {
 
             Mail::send('emails.approvazione', ['user' => $referente->nome], function ($m) use ($referente) {
                 $m->from('office@ggallery.it', 'G A P');
-                $m->to($referente->email, $referente->name)->subject('Richiesto intervento');
+//                $m->to($referente->email, $referente->name)->subject('Richiesto intervento');
+                $m->to('antonio@gallerygroup.it', $referente->name)->subject('Richiesto intervento');
             });
         }
 
