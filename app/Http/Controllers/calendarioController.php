@@ -11,6 +11,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Mail;
+use Spatie\GoogleCalendar\Event;
 
 class calendarioController extends Controller {
 
@@ -155,11 +156,22 @@ class calendarioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
+
         $cal = \App\calendario::find($id);
         $cal->approvato= 1;
-        
 
+        //prima di salvare l'evento lo carico su google
+        $event = new Event;
+        $event->name = $cal->user->nome." ".$cal->user->cognome  ." - ". $cal->commessa->oggetto ." " . $cal->type;
+
+        $event->startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/London');
+        $event->endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/London')->addHours($cal->n_ore);
+
+        $return = $event->save();
+
+//        $data = Event::find($return->googleEvent->id);
+
+        $cal->google_calendar_id = $return->googleEvent->id;
         $cal->save();
 
 
