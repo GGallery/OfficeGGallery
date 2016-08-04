@@ -84,6 +84,7 @@ Route::group(array('middleware' => 'auth'), function() {
 
     Route::resource('calendar', 'calendarioController@calendar');
     Route::resource('feriepermessi', 'calendarioController@feriepermessi');
+    Route::resource('approvazione', 'calendarioController@approvazione');
     
     
 

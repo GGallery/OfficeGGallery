@@ -46,6 +46,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('\App\Usergroups' , 'user_group' , 'user_id', 'group_id' );
     }
 
+
+    public function commesse()
+    {
+        return $this->belongsToMany('\App\commesse' , 'cm_calendario', 'dipendenti_id' , 'commessa_id');
+    }
+
+
+
     public function getFullName()
     {
         return $this->cognome. " " . $this->nome;

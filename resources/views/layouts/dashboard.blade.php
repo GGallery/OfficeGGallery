@@ -285,6 +285,10 @@
                     </li>
 
 
+                    <li {{ (Request::is('*approvazione') ? 'class="active"' : '') }}>
+                        <a href="{{ url ('approvazione') }}"><i class="fa fa-calendar fa-fw"></i>Approvazione</a>
+                    </li>
+
 
                      <li {{ (Request::is('*calendar') ? 'class="active"' : '') }}>
                         <a href="{{ url ('calendar') }}"><i class="fa fa-calendar fa-fw"></i>Calendario mie commesse</a>

@@ -43,3 +43,9 @@ and open the template in the editor.
 #calendario .panel-title{
 	font-size: 10px !important;
 }
+
+.autoWidth {
+    width: auto;
+    margin:10px;
+}
+

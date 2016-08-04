@@ -23,6 +23,7 @@
 
         <div class="form-group">
             {{ Form::hidden('dipendenti_id', Auth::user()->id, ['class' => 'form-control', 'id' => 'dipendenti_id'  ]) }}
+            {{ Form::hidden('dalle_ore', 0 ,['class' => 'form-control' ]) }}
         </div>
 
 
@@ -64,7 +65,7 @@
                       'class' => "btn btn-danger type "
                      ])}}
 
-            {{Form::button('Permesso+' ,[
+            {{Form::button('Recupero    +' ,[
                      'type' => 2,
                      'type_text' => 'Recupero+',
                       'class' => "btn btn-warning  type"

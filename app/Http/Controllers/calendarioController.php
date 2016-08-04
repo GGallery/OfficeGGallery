@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\calendario;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Mail;
@@ -73,19 +74,22 @@ class calendarioController extends Controller {
         $calendario->dipendenti_id = $request->input('dipendenti_id');
         $calendario->commessa_id = $request->input('commessa_id');
         $calendario->n_ore = $request->input('n_ore');
-        $calendario->giorno = $request->input('giorno');
+
+        
+        $giorno = $request->input('giorno');
+        $ora = $request->input('dalle_ore');
+
+        $calendario->giorno = Carbon::createFromFormat('Y-m-d H', $giorno.' '. $ora );
+        
         $calendario->type= $request->input('type');
-
-
-
 
         //        1 Straordinario **
         //        2 Recupero+
         //        3 Recupero- **
-        //        Permesso
-        //        Ferie
+        //        Permesso**
+        //        Ferie**
 
-        $typetocheck=[1, 3];
+        $typetocheck=[1, 2,3];
         $commessatocheck=[10000,10001];
 
         if(in_array($calendario->type, $typetocheck) || in_array($calendario->commessa_id, $commessatocheck))
@@ -205,13 +209,24 @@ class calendarioController extends Controller {
 
     public function feriepermessi() {
         //
-        $data['commesse_ferie_permessi'] = commesse::where('id', '>=', 10000)
-            ->get();
+        $crediti = new calendario();
+        $data['crediti'] = $crediti->creditoRecuperi(Auth::user()->id);
 
-
-        \Debugbar::info($data);
         return view('calendario.feriepermessi', $data);
     }
+
+    
+    public function approvazione() {
+        //
+        
+        $data['approvazioni'] = calendario::where('approvato' , 0)->get();
+
+        \Debugbar::info($data['approvazioni']);
+
+
+        return view('calendario.approvazione', $data);
+    }
+
 
 
 
