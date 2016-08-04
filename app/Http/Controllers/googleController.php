@@ -18,7 +18,7 @@ class googleController extends Controller
 		
 		$event = new Event;
 
-		$event->name = 'sbam';
+		$event->name = 'sbamTONY';
 		$event->startDateTime = Carbon::now();
 		$event->endDateTime = Carbon::tomorrow('Europe/London');
 
@@ -26,7 +26,14 @@ class googleController extends Controller
 
 		$data = Event::find($return->googleEvent->id);
 
-        return true;
-        
+
+			\Debugbar::info($data);
+
+			return view('/home' );
+
+//        return true;
+
+
+
     }
 }

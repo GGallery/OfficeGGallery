@@ -113,8 +113,8 @@ class calendarioController extends Controller {
 
             Mail::send('emails.approvazione', ['user' => $referente->nome], function ($m) use ($referente) {
                 $m->from('office@ggallery.it', 'G A P');
-//                $m->to($referente->email, $referente->name)->subject('Richiesto intervento');
-                $m->to('antonio@gallerygroup.it', $referente->name)->subject('Richiesto intervento');
+                $m->to($referente->email, $referente->name)->subject('Richiesto intervento');
+//                $m->to('antonio@gallerygroup.it', $referente->name)->subject('Richiesto intervento');
             });
         }
 
@@ -143,6 +143,8 @@ class calendarioController extends Controller {
      */
     public function edit($id) {
         //
+        
+        
     }
 
     /**
@@ -154,6 +156,23 @@ class calendarioController extends Controller {
      */
     public function update(Request $request, $id) {
         //
+        $cal = \App\calendario::find($id);
+        $cal->approvato= 1;
+        
+
+        $cal->save();
+
+
+
+        Mail::send('emails.approvato', ['user' => $cal->user->nome], function ($m) use ($cal) {
+            $m->from('office@ggallery.it', 'G A P');
+            $m->to($cal->user->email, $cal->user->nome)->subject('Richiesta approvata');
+        });
+
+
+        return redirect('approvazione');
+        
+        
     }
 
     /**

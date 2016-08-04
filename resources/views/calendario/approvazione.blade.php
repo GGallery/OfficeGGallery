@@ -18,7 +18,7 @@
                     <th>Azione</th>
                     <th>Giorno</th>
                     <th>Num ore</th>
-                    <th>Approva</th>
+                    <th></th>
 
                     <th> </th>
                 </tr>
@@ -34,9 +34,11 @@
                     <td>{{ $single->type   }}</td>
                     <td>{{ $single->giorno}}</td>
                     <td>{{ $single->n_ore}}</td>
-
-
-                    <td><a class="btn btn-warning" href="calendario/{{$single->id}}/edit">Approva</a></td>
+                    <td>
+                        {{Form::open(['method' => 'put', 'url' =>'calendario/'.$single->id] ) }}
+                        {{ Form::submit('Approva', ['class' => 'btn btn-success']) }}
+                        {{ Form::close() }}
+                    </td>
 
 
                 </tr>
