@@ -21,6 +21,7 @@ elixir(function(mix) {
         'resources/css/sb-admin-2.css',
         'resources/css/timeline.css',
 
+        'resources/css/general.css',
         'resources/css/calendar.css',
 
     ], 'public/assets/stylesheets/styles.css', './');

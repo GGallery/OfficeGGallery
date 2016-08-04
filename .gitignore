@@ -1,6 +1,10 @@
 /vendor
+/node_modules
 /bower_components
 /node_modules
 /nbproject/private/
 !/bower_components/
 .idea/workspace.xml
+.idea/workspace.xml
+.idea/workspace.xml
+node_modules_/yeast/README.md

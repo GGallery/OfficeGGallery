@@ -3,5 +3,6 @@ Ciao {{ $user }},
 e' stata inserita una nuova richiesta che necessita il tuo intervento.
 
 <br><br>
-G A P
+<a href="office.ggallery.it">Accedi</a> a GAP per intervenire
+<br><br>
 
