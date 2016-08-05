@@ -5,13 +5,13 @@
 @section('section')
 
 
-<div class="row">
-    <div class="col-sm-12">
+    <div class="row">
+        <div class="col-sm-12">
 
 
-        <table class="table table-striped">
+            <table class="table table-striped">
 
-            <thead>  <tr>
+                <thead>  <tr>
                     <th>Cognome</th>
                     <th>Nome</th>
                     <th>Commessa</th>
@@ -22,35 +22,43 @@
 
                     <th> </th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
 
                 @foreach($approvazioni as $single)
 
-                <tr>
-                    <td>{{ $single->user->cognome}}</td>
-                    <td>{{ $single->user->nome}}</td>
-                    <td>{{ $single->commessa->oggetto}}</td>
-                    <td>{{ $single->type   }}</td>
-                    <td>{{ $single->giorno}}</td>
-                    <td>{{ $single->n_ore}}</td>
-                    <td>
-                        {{Form::open(['method' => 'put', 'url' =>'calendario/'.$single->id] ) }}
-                        {{ Form::submit('Approva', ['class' => 'btn btn-success']) }}
-                        {{ Form::close() }}
-                    </td>
+                    <tr>
+                        <td>{{ $single->user->cognome}}</td>
+                        <td>{{ $single->user->nome}}</td>
+                        <td>{{ $single->commessa->oggetto}}</td>
+                        <td>{{ $single->type   }}</td>
+                        <td>{{ $single->giorno}}</td>
+                        <td>{{ $single->n_ore}}</td>
+                        <td>
+                            @if($single->user->referente_id == Auth::user()->id)
+
+                                {{Form::open(['method' => 'put', 'url' =>'calendario/'.$single->id] ) }}
+                                {{ Form::submit('Approva', ['class' => 'btn btn-success btn-xs']) }}
+                                {{ Form::close() }}
+
+                                {{Form::open(['method' => 'delete', 'url' =>'calendario/'.$single->id] ) }}
+                                {{ Form::submit('Rifiuta', ['class' => 'btn btn-danger btn-xs']) }}
+                                {{ Form::close() }}
+
+                            @endif
+                        </td>
 
 
-                </tr>
+                    </tr>
 
                 @endforeach
 
-            </tbody>
+                </tbody>
 
 
-        </table>
+            </table>
+        </div>
     </div>
-</div>
 
 
 

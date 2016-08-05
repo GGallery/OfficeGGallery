@@ -51,7 +51,7 @@ class usersController extends Controller {
             , 'email.email' => 'L\'email non è in formato corretto'
         ]);
 
-        $user = \App\User::find($id);
+        $user = User::find($id);
         $user->nome = $request->input('nome');
         $user->cognome = $request->input('cognome');
         $user->email = $request->input('email');
@@ -67,8 +67,6 @@ class usersController extends Controller {
                 $user->groups()->attach(Usergroups::where('id', $group)->first());
             }
         }
-
-
 
         return redirect('users')->with('ok_message', 'La tua rubrica è stata aggiornata');
     }

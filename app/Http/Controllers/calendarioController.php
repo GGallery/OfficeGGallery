@@ -45,9 +45,6 @@ class calendarioController extends Controller {
         return view('calendario.create', $data);
     }
 
-
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -108,7 +105,7 @@ class calendarioController extends Controller {
 
         if(!$calendario->approvato)
         {
-            $referente = \App\User::where('id', Auth::user()->referente_id)->first();
+            $referente = User::where('id', Auth::user()->referente_id)->first();
 
             \Debugbar::info($referente->email);
 
@@ -118,10 +115,6 @@ class calendarioController extends Controller {
 //                $m->to('antonio@gallerygroup.it', $referente->name)->subject('Richiesto intervento');
             });
         }
-
-
-
-
 
         return redirect('calendario')->with('ok_message', 'Ok commessa aggiunta correttamente');
     }
@@ -157,7 +150,7 @@ class calendarioController extends Controller {
      */
     public function update(Request $request, $id) {
 
-        $cal = \App\calendario::find($id);
+        $cal = calendario::find($id);
         $cal->approvato= 1;
 
         //prima di salvare l'evento lo carico su google
@@ -169,22 +162,16 @@ class calendarioController extends Controller {
 
         $return = $event->save();
 
-//        $data = Event::find($return->googleEvent->id);
-
         $cal->google_calendar_id = $return->googleEvent->id;
         $cal->save();
-
-
 
         Mail::send('emails.approvato', ['user' => $cal->user->nome], function ($m) use ($cal) {
             $m->from('office@ggallery.it', 'G A P');
             $m->to($cal->user->email, $cal->user->nome)->subject('Richiesta approvata');
         });
 
-
         return redirect('approvazione');
-        
-        
+
     }
 
     /**
@@ -249,17 +236,11 @@ class calendarioController extends Controller {
     
     public function approvazione() {
         //
-        
+
         $data['approvazioni'] = calendario::where('approvato' , 0)->get();
 
         \Debugbar::info($data['approvazioni']);
 
-
         return view('calendario.approvazione', $data);
     }
-
-
-
-
-
 }
