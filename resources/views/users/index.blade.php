@@ -28,7 +28,11 @@
                     <td>{{ $dip->nome }}</td>
                     <td>{{ $dip->email }}</td>
                     <td>{{ $dip->societa->societa }}</td>
-                    <td><a class="btn btn-warning" href="users/{{$dip->id}}/edit">modifica</a></td>
+                    <td>
+                        @if(Auth::user()->hasAnyGroups('Admin'))
+                        <a class="btn btn-warning" href="users/{{$dip->id}}/edit">modifica</a>
+                        @endif
+                    </td>
                 </tr>  
 
                 @endforeach 

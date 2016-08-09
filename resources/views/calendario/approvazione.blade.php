@@ -31,7 +31,7 @@
                         <td>{{ $single->user->cognome}}</td>
                         <td>{{ $single->user->nome}}</td>
                         <td>{{ $single->commessa->oggetto}}</td>
-                        <td>{{ $single->type   }}</td>
+                        <td>{{ $single->tipoassenza->tipo   }}</td>
                         <td>{{ $single->giorno}}</td>
                         <td>{{ $single->n_ore}}</td>
                         <td>

@@ -22,11 +22,17 @@ class calendarioController extends Controller {
      */
     public function index() {
         //
-        $data['mostUsed'] = calendario::where('dipendenti_id',  Auth::user()->id)
-            ->where('commessa_id', '<' ,10000) //escludo ferie e permessi
+        $data['mostUsed'] = calendario::take(5)
+            ->where('dipendenti_id',  Auth::user()->id)
+            ->where('commessa_id', ">" ,  1)
+            ->with('commessa')
             ->orderBy('giorno', 'desc')
             ->distinct()
-            ->get(['commessa_id']);
+            ->get();
+
+
+        Debugbar($data['mostUsed']);
+
         return view('calendario.create', $data);
     }
 
@@ -37,12 +43,8 @@ class calendarioController extends Controller {
      */
     public function create() {
         //
-        $data['mostUsed'] = calendario::where('dipendenti_id',  Auth::user()->id)
-            ->where('commessa_id', '<' ,10000) //escludo ferie e permessi
-            ->orderBy('giorno', 'desc')
-            ->distinct()
-            ->get(['commessa_id']);
-        return view('calendario.create', $data);
+
+        return $this->index();
     }
 
     /**
@@ -73,24 +75,22 @@ class calendarioController extends Controller {
         $calendario->commessa_id = $request->input('commessa_id');
         $calendario->n_ore = $request->input('n_ore');
 
-        
+
         $giorno = $request->input('giorno');
         $ora = $request->input('dalle_ore');
 
         $calendario->giorno = Carbon::createFromFormat('Y-m-d H', $giorno.' '. $ora );
-        
+
         $calendario->type= $request->input('type');
 
-        //        1 Straordinario **
-        //        2 Recupero+
-        //        3 Recupero- **
-        //        Permesso**
-        //        Ferie**
 
-        $typetocheck=[1, 2,3];
-        $commessatocheck=[10000,10001];
+        //        1 Ferie**
+        //        2 Permesso**
+        //        3 Straordinario **
+        //        4 Recupero+
+        //        5 Recupero- **
 
-        if(in_array($calendario->type, $typetocheck) || in_array($calendario->commessa_id, $commessatocheck))
+        if($calendario->type > 0)
             $calendario->approvato = 0;
         else
             $calendario->approvato = 1 ;
@@ -137,8 +137,8 @@ class calendarioController extends Controller {
      */
     public function edit($id) {
         //
-        
-        
+
+
     }
 
     /**
@@ -181,9 +181,15 @@ class calendarioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
+
+
         calendario::destroy($id);
-        return redirect('calendar')->with('ok_message', 'Eliminata');
+//        return redirect('calendar')->with('giorno', '2015-12-05')->with('ok_message', 'Eliminata');
+        $_REQUEST['giorno'] = '2015-12-05';
+        return redirect('calendar')->with($_REQUEST);
+
     }
+
 
     public function calendar(Request $request) {
 
@@ -233,7 +239,7 @@ class calendarioController extends Controller {
         return view('calendario.feriepermessi', $data);
     }
 
-    
+
     public function approvazione() {
         //
 

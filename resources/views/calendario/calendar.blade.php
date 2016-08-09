@@ -35,7 +35,7 @@
             <div class="col-xs-2">
                 <div class="panel panel-default" style="height: 400px;" >
                     <div class="panel-heading">
-                        <h3 class="panel-title"> {{ $nome }}   </h3>
+                        <h3 class="panel-title"> {{ $nome }} <span class="pull-right badge"><b>{{  $totore[$nome]  }}   </b></span></h3>
                     </div>
                     <div class="panel-body">
                         @foreach($giorno as $pup)
@@ -47,11 +47,7 @@
 
         @endforeach
 
-        @foreach($totore as $nome => $tot)
-            <div class="col-xs-2">
-                TOT: <b>{{$tot}}</b>
-            </div>
-        @endforeach
+
 
 
         @stop

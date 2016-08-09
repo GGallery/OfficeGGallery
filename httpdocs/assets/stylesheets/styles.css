@@ -9114,6 +9114,12 @@ canvas.round {
         border-left-width: 0;
     }
 }
+.autoWidth {
+    width: auto;
+    margin:10px;
+}
+
+
 /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -9148,9 +9154,7 @@ and open the template in the editor.
     margin-bottom: 0px !important;
 }
 
-#calendario .panel-heading{
-	padding: 1px 1px !important;;
-}
+
 
 #calendario .panel-body{
 	padding: 1px !important;
@@ -9159,4 +9163,11 @@ and open the template in the editor.
 #calendario .panel-title{
 	font-size: 10px !important;
 }
+
+.autoWidth {
+    width: auto;
+    margin:10px;
+}
+
+
 /*# sourceMappingURL=styles.css.map */

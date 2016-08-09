@@ -33,47 +33,70 @@
             {{ Form::hidden('commessa_id', null, ['id'=>'commessa_id' ,  'class' => 'form-control'  ]) }}
 
         </div>
+        <div class="form-inline">
+            <div class="form-group">
+                {{ Form::label('n_ore', 'Numero ore:') }}
+                {{ Form::select('n_ore',
+                array(
+                "0.5" => "0,5",
+                "1" => "1",
+                "1.5" => "1,5",
+                "2" => "2",
+                "2.5" => "1,5",
+                "3" => "3",
+                "3.5" => "3,5",
+                "4" => "4",
+                "4.5" => "4,5",
+                "5" => "5",
+                "5.5" => "5,5",
+                "6" => "6",
+                "6.5" => "6,5",
+                "7" => "7",
+                "7.5" => "7,5",
+                "8" => "8"
+                )
+                ,null, ['class' => 'form-control autoWidth']) }}
 
-        <div class="form-group">
-            {{ Form::label('n_ore', 'Numero ore:') }}
-            {{ Form::text('n_ore', null, ['class' => 'form-control', 'placeholder' => 'per le mezzore inserisci  ,5']) }}
+
+
+
+                {{ Form::label('giorno', 'Giorno:') }}
+                {{ Form::text('giorno', null, ['class' => 'form-control autoWidth']) }}
+
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="form-group">
+
+                {{ Form::text('type_text', 'Commessa normale', ['class' => 'form-control ', 'id'=>'type_text', "disabled"]) }}
+                {{ Form::hidden('type', 0, ['class' => 'form-control' , 'id'=>'type'  ]) }}
+
+                {{ Form::label('cambia tipo:') }}
+
+                {{Form::button('Regolare' ,[
+                         'type' => 0,
+                         'type_text' => 'Commessa normale',
+                          'class' => "btn btn-default type "
+                         ])}}
+
+                {{Form::button('Recupero    +' ,[
+                         'type' => 4,
+                         'type_text' => 'Recupero+ ',
+                          'class' => "btn btn-warning  type"
+                         ])}}
+
+                {{Form::button('Straordinario' ,[
+                         'type' => 3,
+                         'type_text' => 'Straordinario ',
+                          'class' => "btn btn-danger type "
+                         ])}}
+
+
+
+
+            </div>
         </div>
 
-
-        <div class="form-group">
-            {{ Form::label('giorno', 'Giorno:') }}
-            {{ Form::text('giorno', null, ['class' => 'form-control']) }}
-        </div>
-
-
-        <div class="form-group">
-            {{ Form::label('type', 'Tipo:') }}
-            {{ Form::text('type_text', '-', ['class' => 'form-control selectWidth', 'id'=>'type_text']) }}
-            {{ Form::hidden('type', 0, ['class' => 'form-control']) }}
-        </div>
-
-        <div class="form-group">
-            {{Form::button('Regolare' ,[
-                     'type' => 0,
-                     'type_text' => 'Commessa normale',
-                      'class' => "btn btn-default type "
-                     ])}}
-
-            {{Form::button('Straordinario' ,[
-                     'type' => 1,
-                     'type_text' => 'Straordinario (da approvare)',
-                      'class' => "btn btn-danger type "
-                     ])}}
-
-            {{Form::button('Recupero    +' ,[
-                     'type' => 2,
-                     'type_text' => 'Recupero+',
-                      'class' => "btn btn-warning  type"
-                     ])}}
-
-
-
-        </div>
 
 
 
@@ -85,7 +108,7 @@
 
     </div>
 
-    <div class=" col-md-4 col-md-offset-2">
+    <div class="col-xs-hidden col-md-4 col-md-offset-2">
 
         {{ Form::label('Ultime commesse usate') }}
         <div class="list-group">

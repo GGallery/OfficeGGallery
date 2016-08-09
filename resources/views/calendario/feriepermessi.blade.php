@@ -33,17 +33,17 @@
         {{ Form::label('Scegli Ferie, permesso o recupero ') }}
         <div class="list-group">
             <a href="#"
-               commessa_id="10001"
+               commessa_id="1"
                commessa_text="Ferie"
-               type="0"
+               type="1"
                class="list-group-item  ferieGroup">
                 Ferie
             </a>
 
             <a href="#"
-               commessa_id="10000"
+               commessa_id="1"
                commessa_text="Permesso"
-               type="0"
+               type="2"
                class="list-group-item  ferieGroup">
                 Permesso
             </a>
@@ -98,12 +98,31 @@
                 {{ Form::select('dalle_ore', array(9 => 9,10 => 10,11 => 11,12 => 12,13 => 13,14 => 14 ,15 => 15 ,16 => 16,17 =>17,18 => 18 ) , null,['class' => 'form-control autoWidth' ]) }}
                 {{ Form::select('dalle_minuti', array('0' => '00' , '30'=>' e mezza'),null,   ['class' => 'form-control autoWidth ']) }}
 
-            </div>
-        </div>
 
-        <div class="form-group">
-            {{ Form::label('n_ore', 'Numero ore:') }}
-            {{ Form::text('n_ore', null, ['class' => 'form-control', 'placeholder' => 'per le mezzore inserisci  ,5']) }}
+
+                {{ Form::label('n_ore', 'Numero ore:') }}
+                {{ Form::select('n_ore',
+                array(
+                "0.5" => "0,5",
+                "1" => "1",
+                "1.5" => "1,5",
+                "2" => "2",
+                "2.5" => "1,5",
+                "3" => "3",
+                "3.5" => "3,5",
+                "4" => "4",
+                "4.5" => "4,5",
+                "5" => "5",
+                "5.5" => "5,5",
+                "6" => "6",
+                "6.5" => "6,5",
+                "7" => "7",
+                "7.5" => "7,5",
+                "8" => "8"
+                )
+                ,null, ['class' => 'form-control autoWidth']) }}
+
+            </div>
         </div>
 
         <div class="pull-right">

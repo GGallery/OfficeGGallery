@@ -14,6 +14,11 @@ class calendario extends Model
         return $this->belongsTo('App\commesse' , 'commessa_id');
     }
 
+    public function tipoassenza(){
+        return $this->belongsTo('App\assenzatipi' , 'type');
+    }
+
+
     public function user(){
         return $this->belongsTo('App\User' , 'dipendenti_id');
     }
@@ -30,8 +35,8 @@ class calendario extends Model
           SELECT
             c.dipendenti_id,
             c.commessa_id,
-            (SELECT SUM(n_ore) FROM cm_calendario as pp WHERE type  = 2 and pp.commessa_id = c.commessa_id and pp.dipendenti_id = c.dipendenti_id) as RecuperiPOS,
-            (SELECT SUM(n_ore) FROM cm_calendario as pp WHERE type  = 3 and pp.commessa_id = c.commessa_id and pp.dipendenti_id = c.dipendenti_id) as RecuperiNEG
+            (SELECT SUM(n_ore) FROM cm_calendario as pp WHERE type  = 4 and pp.commessa_id = c.commessa_id and pp.dipendenti_id = c.dipendenti_id) as RecuperiPOS,
+            (SELECT SUM(n_ore) FROM cm_calendario as pp WHERE type  = 5 and pp.commessa_id = c.commessa_id and pp.dipendenti_id = c.dipendenti_id) as RecuperiNEG
           FROM
           cm_calendario as c ";
 

@@ -1172,16 +1172,16 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
                 "shasum": ""
             },
             "require": {
@@ -1209,6 +1209,7 @@
                 }
             ],
             "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
             "keywords": [
                 "http",
                 "http-message",
@@ -1217,7 +1218,7 @@
                 "request",
                 "response"
             ],
-            "time": "2015-05-04 20:22:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -1331,16 +1332,16 @@
         },
         {
             "name": "spatie/laravel-google-calendar",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-google-calendar.git",
-                "reference": "0fdb824f23f75a8bb52f443bfc7fc08a929e2b37"
+                "reference": "c42246dc9fa806827807d34d1b6075d183dd1adc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-google-calendar/zipball/0fdb824f23f75a8bb52f443bfc7fc08a929e2b37",
-                "reference": "0fdb824f23f75a8bb52f443bfc7fc08a929e2b37",
+                "url": "https://api.github.com/repos/spatie/laravel-google-calendar/zipball/c42246dc9fa806827807d34d1b6075d183dd1adc",
+                "reference": "c42246dc9fa806827807d34d1b6075d183dd1adc",
                 "shasum": ""
             },
             "require": {
@@ -1382,7 +1383,7 @@
                 "schedule",
                 "spatie"
             ],
-            "time": "2016-07-29 18:15:17"
+            "time": "2016-08-06 21:50:28"
         },
         {
             "name": "swiftmailer/swiftmailer",
