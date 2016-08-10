@@ -81,30 +81,44 @@
 
 
 
-                        @if(Auth::user()->hasAnyGroups('Admin'))
-                            <li class="divider"></li>
-                            <li class="divider"></li>
 
+                        <li class="divider"></li>
+                        <li class="divider"></li>
+
+
+                        @if(Auth::user()->hasAnyGroups(array('Admin', 'Contabilita')))
                             <li {{ (Request::is('*Dipendenti') ? 'class="active"' : '') }}>
                                 <a href="{{ url ('users') }}"><i class="fa fa-user fa-fw"></i>Dipendenti</a>
                             </li>
+                        @endif
 
+                        @if(Auth::user()->hasAnyGroups(array('Admin', 'Contabilita')))
                             <li {{ (Request::is('*Commesse') ? 'class="active"' : '') }}>
                                 <a href="{{ url ('commesse') }}"><i class="fa fa-dribbble  fa-fw"></i>Commesse</a>
-                            </li>
 
+                            </li>
+                        @endif
+
+                        @if(Auth::user()->hasAnyGroups(array('Admin', 'Contabilita')))
                             <li {{ (Request::is('*Commesse') ? 'class="active"' : '') }}>
                                 <a href="{{ url ('commesse/create') }}"><i class="fa fa-dribbble  fa-fw"></i>Nuova Commesse</a>
                             </li>
+                        @endif
 
+                        @if(Auth::user()->hasAnyGroups(array('Admin', 'Tutor')))
                             <li {{ (Request::is('*approvazione') ? 'class="active"' : '') }}>
-                                <a href="{{ url ('approvazione') }}"><i class="fa   fa-unlock-alt fa-fw"></i>Approvazione</a>
+                                <a href="{{ url ('approvazione') }}"><i class="fa   fa-unlock-alt fa-fw"></i>Approvazione extra</a>
                             </li>
 
+                        @endif
 
+
+
+                        @if(Auth::user()->hasAnyGroups(array('Contabilita')))
+                            <li {{ (Request::is('*rilevazione') ? 'class="active"' : '') }}>
+                                <a href="{{ url ('rilevazione') }}"><i class="fa   fa-unlock-alt fa-fw"></i>Rilevazione extra</a>
+                            </li>
                             @endif
-
-
 
 
                                     <!--</li></ul>-->

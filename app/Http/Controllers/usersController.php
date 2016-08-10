@@ -17,7 +17,7 @@ class usersController extends Controller {
     //
     public function index() {
 
-        $data = User::with('societa')->orderBy('cognome')->get();
+        $data = User::with('societa')->where('bloccato', 0)->orderBy('cognome')->get();
         return view('users.index', compact('data'));
     }
 
@@ -55,6 +55,8 @@ class usersController extends Controller {
         $user->nome = $request->input('nome');
         $user->cognome = $request->input('cognome');
         $user->email = $request->input('email');
+        $user->bloccato= $request->input('bloccato');
+        $user->referente_id= $request->input('referente_id');
 
         $user->save();
 

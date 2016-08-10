@@ -59,11 +59,14 @@
                     {{ Form::label('referente_id', 'Referente:') }}
                     {{ Form::select('referente_id', $leader,null ,['class' => 'form-control' ,
 
-                    Auth::user()->hasAnyGroups('Admin')  ? '' :'disabled'
-
-
-                    , 'disabled' ]) }}
+                    Auth::user()->hasAnyGroups('Admin')  ? '' :'disabled'    ]) }}
                 </div>
+
+                <div class="form-group">
+                    {{ Form::label('bloccato', 'Bloccato:') }}
+                    {{ Form::select('bloccato', array(0 => 'No' , 1=> 'Si'),null ,['class' => 'form-control' ]) }}
+                </div>
+
 
 
             </div>

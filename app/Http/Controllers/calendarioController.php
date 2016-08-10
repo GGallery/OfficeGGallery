@@ -90,10 +90,15 @@ class calendarioController extends Controller {
         //        4 Recupero+
         //        5 Recupero- **
 
-        if($calendario->type > 0)
+        $da_approvare= \App\assenzatipi::lists('da_approvare', 'id')->toArray();
+
+
+        if($da_approvare[$calendario->type])
             $calendario->approvato = 0;
         else
             $calendario->approvato = 1 ;
+
+        \Debugbar::info($calendario->approvato, "approvato?");
 
 
         try {
@@ -249,4 +254,31 @@ class calendarioController extends Controller {
 
         return view('calendario.approvazione', $data);
     }
+
+
+    public function rilevazione() {
+        $data['rilevazione'] = calendario::whereNull('rilevato')
+            ->where('approvato' , 1)
+            ->where('commessa_id' , 1)
+            ->whereIn('type' , [1,2,3,6])
+            ->orderBy('dipendenti_id')
+            ->get();
+
+        return view('calendario.rilevazione', $data);
+    }
+
+    public function do_rileva() {
+
+        $today = \Carbon\Carbon::today();
+        $cal = calendario::whereNull('rilevato')
+            ->where('approvato' , 1)
+            ->where('commessa_id' , 1)
+            ->whereIn('type' , [1,2,3,6])
+            ->update(['rilevato' => $today]);
+
+
+        return redirect('home');
+
+    }
+
 }

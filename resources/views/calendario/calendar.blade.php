@@ -33,7 +33,7 @@
         @foreach($settimana as $nome => $giorno)
 
             <div class="col-xs-2">
-                <div class="panel panel-default" style="height: 400px;" >
+                <div class="panel panel-default" style="height: 800px;" >
                     <div class="panel-heading">
                         <h3 class="panel-title"> {{ $nome }} <span class="pull-right badge"><b>{{  $totore[$nome]  }}   </b></span></h3>
                     </div>

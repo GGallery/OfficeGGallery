@@ -31,6 +31,8 @@
                 </tr>
                 </thead>
                 <tbody>
+
+                <?php $canedit = Auth::user()->hasAnyGroups('Admin'); ?>
                 @foreach($data as $val)
                     <tr>
                         <td>{{ $val->id }}</td>
@@ -40,7 +42,7 @@
                         <td>{{ $val->stato }}</td>
                         <td>{{ $val->referente }}</td>
                         <td>
-                            @if(Auth::user()->hasAnyGroups('Admin'))
+                            @if($canedit)
                                 <a class="btn btn-warning" href="commesse/{{$val->id}}/edit">modifica</a>
                             @endif
                         </td>

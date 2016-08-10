@@ -18,20 +18,9 @@ class commesseController extends Controller {
      */
     public function index() {
 
-        //$data = commesse::with('Clienti')->get();
-
-        //client_id
-        //952177561871-hm8l3lo1qdvrfofov433drj70e23l6aj.apps.googleusercontent.com
-        //secret
-        //3_R0EPdO7-XJAtvq-3Zsyz44
-
         $commesse = new \App\commesse();
-
         $data = $commesse->lista();
-
         return view('commesse.index', compact('data'));
-
-
     }
 
     /**
@@ -130,8 +119,16 @@ class commesseController extends Controller {
      */
     public function destroy($id) {
         //
-
         echo "ok";
+    }
+
+
+    public function analisiCommesse(){
+
+        $commesse = new \App\commesse();
+        $data = $commesse->analisi();
+        return view('commesse.analisi', compact('data'));
+
     }
 
 }

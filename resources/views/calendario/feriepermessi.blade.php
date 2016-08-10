@@ -30,7 +30,7 @@
 
     <div class="col-xs-6">
 
-        {{ Form::label('Scegli Ferie, permesso o recupero ') }}
+        {{ Form::label('Scegli Ferie, permesso, recupero o malattia') }}
         <div class="list-group">
             <a href="#"
                commessa_id="1"
@@ -48,6 +48,13 @@
                 Permesso
             </a>
 
+            <a href="#"
+               commessa_id="1"
+               commessa_text="Malattia"
+               type="6"
+               class="list-group-item  ferieGroup">
+                Malattia
+            </a>
 
             <div class="list-group">
                 @foreach($crediti as $single)

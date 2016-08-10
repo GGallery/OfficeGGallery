@@ -108,7 +108,7 @@
 
     </div>
 
-    <div class="col-xs-hidden col-md-4 col-md-offset-2">
+    <div class="hidden-xs col-md-4 col-md-offset-2">
 
         {{ Form::label('Ultime commesse usate') }}
         <div class="list-group">

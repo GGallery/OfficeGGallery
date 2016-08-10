@@ -81,7 +81,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function hasGroup($group)
     {
         $chk = $this->groups()->where('name', $group)->first();
-        \Debugbar::info($group);
         \Debugbar::info($chk);
         if($chk){
             return true;

@@ -15,14 +15,46 @@ Route::group(array('middleware' => 'auth'), function() {
 
 
     Route::get('/', function() {
-            return View::make('home');
-        });
+        $today = \Carbon\Carbon::today();
+        $tomorrow = \Carbon\Carbon::tomorrow();
 
+        $data['assenze'] = \App\calendario::where('type', '>' , 0)
+            ->where('giorno' ,'>',$today)
+            ->where('giorno' ,'<',$tomorrow)
+            ->where('approvato' , 1)
+            ->get();
 
+        $data['assenze_domani'] = \App\calendario::where('type', '>' , 0)
+            ->where('giorno' ,'>',$tomorrow)
+            ->where('approvato' , 1)
+            ->get();
+
+        $data['ultime_commesse'] = \App\commesse::take(10)->orderBy('created_at', 'desc')->get();
+
+        return View::make('home')->with($data);
+    });
 
     Route::get('home', function() {
-        return View::make('home');
+
+        $today = \Carbon\Carbon::today();
+        $tomorrow = \Carbon\Carbon::tomorrow();
+
+        $data['assenze'] = \App\calendario::where('type', '>' , 0)
+            ->where('giorno' ,'>',$today)
+            ->where('giorno' ,'<',$tomorrow)
+            ->where('approvato' , 1)
+            ->get();
+        
+        $data['assenze_domani'] = \App\calendario::where('type', '>' , 0)
+            ->where('giorno' ,'>',$tomorrow)
+            ->where('approvato' , 1)
+            ->get();
+
+        $data['ultime_commesse'] = \App\commesse::take(10)->orderBy('created_at', 'desc')->get();
+
+        return View::make('home')->with($data);
     });
+
 
     Route::get('/charts', function() {
         return View::make('mcharts');
@@ -76,7 +108,7 @@ Route::group(array('middleware' => 'auth'), function() {
 
     Route::resource('users', 'usersController');
     Route::resource('commesse', 'commesseController');
-    
+
 
     Route::resource('calendario', 'calendarioController');
     Route::resource('calendario.destroy', 'calendarioController@destroy');
@@ -85,11 +117,13 @@ Route::group(array('middleware' => 'auth'), function() {
     Route::resource('calendar', 'calendarioController@calendar');
     Route::resource('feriepermessi', 'calendarioController@feriepermessi');
     Route::resource('approvazione', 'calendarioController@approvazione');
+    Route::resource('rilevazione', 'calendarioController@rilevazione');
+    Route::resource('do_rileva', 'calendarioController@do_rileva');
 
     Route::resource('google', 'googleController');
 
-    
-    
+
+
 
     //AUTOCOMPLETE 
     Route::get('autocomplete/commesse', 'autocompleteController@Commesse');

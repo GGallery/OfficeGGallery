@@ -19,7 +19,9 @@
                     <th> </th>  
                 </tr>  
             </thead> 
-            <tbody> 
+            <tbody>
+
+            <?php $canedit = Auth::user()->hasAnyGroups('Admin'); ?>
 
                 @foreach($data as $dip) 
 
@@ -29,8 +31,8 @@
                     <td>{{ $dip->email }}</td>
                     <td>{{ $dip->societa->societa }}</td>
                     <td>
-                        @if(Auth::user()->hasAnyGroups('Admin'))
-                        <a class="btn btn-warning" href="users/{{$dip->id}}/edit">modifica</a>
+                        @if($canedit)
+                            <a class="btn btn-warning" href="users/{{$dip->id}}/edit">modifica</a>
                         @endif
                     </td>
                 </tr>  
