@@ -12,7 +12,7 @@ class societa extends Model {
     
      public function dipendenti()
     {
-        return $this->hasMany('App\dipendenti');
+        return $this->hasMany('App\User');
     }
 
     
