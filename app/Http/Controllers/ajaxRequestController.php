@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
-class autocompleteController extends Controller {
+class ajaxRequestController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -48,5 +48,6 @@ class autocompleteController extends Controller {
         }
         return \Response::json($results);
     }
+
 
 }

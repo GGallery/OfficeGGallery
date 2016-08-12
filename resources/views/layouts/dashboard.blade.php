@@ -50,7 +50,7 @@
                             {{ Form::open(['method'=>'GET','url'=>'commesse','class'=>'','role'=>'search'])  }}
                             <div class="form-group">
                                 <div class="input-group custom-search-form form-group">
-                                    <input type="text" class="form-control" placeholder="Cerca commessa...">
+                                    <input type="text" id="search"  name="search"   class="form-control" placeholder="Cerca commessa...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit">
                                     <i class="fa fa-search"></i>

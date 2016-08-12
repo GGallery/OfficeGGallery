@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\calendario;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\commesse;
 use App\clienti;
 use App\User;
+
+use Illuminate\Support\Facades\Input;
+
+use DB;
+
 
 class commesseController extends Controller {
 
@@ -21,6 +27,7 @@ class commesseController extends Controller {
         $commesse = new \App\commesse();
         $data = $commesse->lista();
         return view('commesse.index', compact('data'));
+
     }
 
     /**
@@ -123,11 +130,33 @@ class commesseController extends Controller {
     }
 
 
-    public function analisiCommesse(){
+    public function userPerCommessa(){
+        $id=Input::get('id');
 
-        $commesse = new \App\commesse();
-        $data = $commesse->analisi();
-        return view('commesse.analisi', compact('data'));
+        $data = \App\calendario::
+            select('*', DB::raw('SUM(n_ore) as tot'))
+            ->where('commessa_id', $id)
+            ->with('user')
+            ->with('commessa')
+            ->groupBy('dipendenti_id')
+            ->get();
+
+
+        $info = $data->first();
+
+        $result['utenti'] = array();
+        foreach ($data as $single){
+            $user['nome']= $single->user->nome;
+            $user['cognome']= $single->user->cognome;
+            $user['tot']= $single->tot;
+            $result['utenti'][]=$user;
+        }
+
+        $result['referente'] = $info->commessa->referente;
+        $result['stato'] = $info->commessa->stato;
+        $result['id'] = $info->commessa->id;
+
+        return \Response::json($result);
 
     }
 

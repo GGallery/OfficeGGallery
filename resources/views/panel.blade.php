@@ -13,16 +13,19 @@
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		@endsection
+
 		@include('widgets.panel', array('header'=>true, 'as'=>'panel1'))
 		@section ('panel2_panel_title', 'Inverse Header')
 		@section ('panel2_panel_body')
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		sdsdsdsLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 		 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 		 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 		 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		 proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
 		@endsection
+
+
 		@include('widgets.panel', array('class'=>'primary', 'header'=>true, 'as'=>'panel2'))
 		@section ('panel3_panel_title', 'Header')
 		@section ('panel3_panel_body')

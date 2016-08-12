@@ -108,6 +108,9 @@ Route::group(array('middleware' => 'auth'), function() {
 
     Route::resource('users', 'usersController');
     Route::resource('commesse', 'commesseController');
+    Route::get('userPerCommessa', 'commesseController@userPerCommessa');
+
+
 
 
     Route::resource('calendario', 'calendarioController');
@@ -126,10 +129,16 @@ Route::group(array('middleware' => 'auth'), function() {
 
 
     //AUTOCOMPLETE 
-    Route::get('autocomplete/commesse', 'autocompleteController@Commesse');
-    Route::get('autocomplete', function() {
-        return View::make('autocomplete');
-    });
+    Route::get('autocomplete/commesse', 'ajaxRequestController@Commesse');
+
+
+
+
+
+
+//    Route::get('autocomplete', function() {
+//        return View::make('autocomplete');
+//    });
 });
 
 
