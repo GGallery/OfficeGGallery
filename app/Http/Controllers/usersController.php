@@ -8,7 +8,7 @@ use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use App\User;
 use App\Usergroups;
-use \App\Societa;
+use \App\societa;
 
 
 

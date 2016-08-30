@@ -219,13 +219,13 @@ class calendarioController extends Controller {
             $d = Carbon::createFromFormat('Y-m-d', $data)->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y');
 
             $settimana[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
-                ->where('giorno', $tillDate)
+                ->wheredate('giorno','=', $tillDate)
                 ->with('commessa')
                 ->get();
 
 
             $totore[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
-                ->where('giorno', $tillDate)
+                ->wheredate('giorno','=', $tillDate)
                 ->with('commessa')
                 ->sum('n_ore');
         }
