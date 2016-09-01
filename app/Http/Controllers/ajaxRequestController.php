@@ -21,10 +21,16 @@ class ajaxRequestController extends Controller {
         $results = array();
 
         $queries = \DB::table('cm_commesse')
-                ->where('id', '<' ,10000) //escludo ferie e permessi
-                ->where('oggetto', 'LIKE', '%' . $term . '%')
-                ->orWhere('protocollo', 'LIKE', '%' . $term . '%')
+                ->join('cm_clienti' , 'cm_clienti.id' , '=' , 'cm_commesse.cliente_id')
+                ->where('cm_commesse.id', '>' ,1) //escludo ferie e permessi
+                ->where(function ($query) use ($term) {
+                    $query
+                        ->orWhere('oggetto', 'LIKE', '%' . $term . '%')
+                        ->orWhere('protocollo', 'LIKE', '%' . $term . '%')
+                        ->orWhere('nome', 'LIKE', '%' . $term . '%');
+            })
                 ->get();
+
 
         foreach ($queries as $query) {
             $results[] = [ 'id' => $query->id, 'value' => $query->protocollo . ' ' . $query->oggetto];
