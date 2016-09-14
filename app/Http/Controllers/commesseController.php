@@ -38,7 +38,7 @@ class commesseController extends Controller {
     public function create() {
 
         $clienti_list = [''=>''] + clienti::lists('nome', 'id')->all();
-        $user= [''=>'']  +  user::orderBy('cognome')->lists('cognome', 'id')->all();
+        $user= [''=>'']  +  user::where('bloccato' , 0)->orderBy('cognome')->lists('cognome', 'id')->all();
         $commesse = commesse::where('abilitata', 1)->orderBy('id', 'desc')->get();
 
         return view('commesse.new')
@@ -100,11 +100,10 @@ class commesseController extends Controller {
      */
     public function edit($id) {
         //
-        $data['datiRecuperati'] = \App\commesse::find($id);
-
-        $clienti_list = clienti::lists('nome', 'id');
-
-        return view('commesse.edit', $data)->with('clienti_list', $clienti_list);
+        $data['clienti_list'] = [''=>''] + clienti::lists('nome', 'id')->all();
+        $data['users']= [''=>'']  +  user::where('bloccato' , 0)->orderBy('cognome')->lists('cognome', 'id')->all();
+        $data['datiRecuperati'] = commesse::where('abilitata', 1)->orderBy('id', 'desc')->find($id);
+        return view('commesse.edit', $data);
     }
 
     /**
@@ -115,6 +114,31 @@ class commesseController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
+
+        $this->validate($request, [
+            'protocollo' => 'required'
+            , 'cliente_id' => 'required'
+            , 'oggetto' => 'required'
+            , 'stato' => 'required'
+            , 'referente' => 'required'
+        ], [
+            'protocollo.required' => 'Il protocollo è obbligatorio!'
+            , 'cliente_id.required' => 'Cliente'
+            , 'oggetto.required' => 'Oggetto'
+            , 'referente' => 'Referente'
+        ]);
+
+        $commessa = new commesse;
+        $commessa->protocollo= $request->input('protocollo');
+        $commessa->cliente_id= $request->input('cliente_id');
+        $commessa->oggetto= $request->input('oggetto');
+        $commessa->stato= $request->input('stato');
+        $commessa->referente= $request->input('referente');
+
+
+        $commessa->save();
+
+        return redirect('commesse')->with('ok_message', 'La tua commessa è stata inserita');
         //
     }
 

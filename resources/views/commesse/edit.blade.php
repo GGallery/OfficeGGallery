@@ -1,0 +1,83 @@
+@extends('layouts.dashboard')
+@section('page_heading','Modifica commessa')
+
+
+@section('section')
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        @if(count($errors->all()) > 0)
+            <div class="alert alert-danger" role="alert">
+                <p><b>OOOPS!</b></p>
+                <ul>
+                    @foreach($errors->all() as $e)
+                        <li>{{$e}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+
+      {{
+      Form::model($datiRecuperati,
+      ['method' => 'put', 'url' =>'commesse/'. $datiRecuperati['id']])
+      }}
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+
+                <div class="form-group">
+                    {{ Form::label('protocollo', 'Protocollo:') }}
+                    {{ Form::text('protocollo', null, ['class' => 'form-control']) }}
+                </div>
+
+
+                <div class="form-group">
+                    {{ Form::label('oggetto', 'Oggetto:') }}
+                    {{ Form::text('oggetto', null, ['class' => 'form-control']) }}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label('cliente', 'Cliente:') }}
+                    {{ Form::select('cliente_id', $clienti_list, null, ['class' => 'form-control']) }}
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    {{ Form::label('referente', 'Referente:') }}
+                    {{ Form::text('referente', null, ['class' => 'form-control']) }}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label('stato', 'Stato:') }}
+                    {{ Form::select('stato', array('In corso' => 'In corso', 'Preventivo' => 'Preventivo', 'Chiusa' => 'Chiusa') , null, ['class' => 'form-control']) }}
+                </div>
+
+                <div class="form-group">
+                    {{ Form::label('colore', 'Colore:') }}
+                    {{ Form::text('colore',  null, ['class' => 'form-control', 'placeholder' => '#1F3G4A']) }}
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="pull-right" id="q">
+            {{ Form::submit('inserisci', ['class' => 'btn btn-success']) }}
+
+            {{ Form::close() }}
+
+
+        </div>
+
+
+</div>
+
+
+
+@stop

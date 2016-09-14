@@ -39,7 +39,7 @@
                         <td>{{ number_format($val->tot, 0) }}</td>
                         <td>
                             @if($canedit)
-                                <a class="btn btn-warning" href="commesse/{{$val->id}}/edit">modifica</a>
+                                <a class="btn btn-warning" href="commesse/{{$val->commessa->id}}/edit">modifica</a>
                             @endif
 
                             @include('widgets.button', array('value'=>'Dettagli', 'class'=>'info dettagli' , 'id' => $val->commessa->id ))

@@ -162,8 +162,15 @@ class calendarioController extends Controller {
         $event = new Event;
         $event->name = $cal->user->nome." ".$cal->user->cognome  ." - ". $cal->commessa->oggetto ." " . $cal->type;
 
-        $event->startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/London');
-        $event->endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/London')->addHours($cal->n_ore);
+
+
+        $event->startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome');
+        $event->endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome')->addHours($cal->n_ore);
+
+        $event->startDateTime->setTimezone('UTC');
+        $event->endDateTime->setTimezone('UTC');
+
+        \Debugbar::info($event->startDateTime);
 
         $return = $event->save();
 

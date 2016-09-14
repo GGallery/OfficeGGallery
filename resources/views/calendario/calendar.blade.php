@@ -61,7 +61,8 @@
                         dateFormat: "yy-mm-dd",
                         changeMonth: true,
                         changeYear: true,
-                        constrainInput: true
+                        constrainInput: true,
+                        firstDay: 1
                     });
                 });
             </script>

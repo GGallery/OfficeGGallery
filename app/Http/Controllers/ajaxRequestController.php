@@ -29,6 +29,7 @@ class ajaxRequestController extends Controller {
                         ->orWhere('protocollo', 'LIKE', '%' . $term . '%')
                         ->orWhere('nome', 'LIKE', '%' . $term . '%');
             })
+                ->select('cm_commesse.id', 'cm_commesse.protocollo', 'cm_commesse.oggetto')
                 ->get();
 
 
