@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Mail;
 use Spatie\GoogleCalendar\Event;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class calendarioController extends Controller {
 
@@ -20,9 +21,9 @@ class calendarioController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index(Request $request) {
         //
-        $data['mostUsed'] = calendario::take(5)
+        $data['mostUsed'] = calendario::take(6)
             ->where('dipendenti_id',  Auth::user()->id)
             ->where('commessa_id', ">" ,  1)
             ->with('commessa')
@@ -30,10 +31,43 @@ class calendarioController extends Controller {
             ->distinct()
             ->get();
 
+        if($request['giorno'])
+            $request->session()->put('giorno', $request['giorno']);
+        else
+            $request->session()->put('giorno', Carbon::today()->toDateString());
 
-        Debugbar($data['mostUsed']);
+        $cur_data = $request->session()->get('giorno');
+        $request->session()->put('next', Carbon::createFromFormat('Y-m-d', $cur_data)->addWeeks(1)->toDateString());
+        $request->session()->put('prev', Carbon::createFromFormat('Y-m-d', $cur_data)->subWeeks(1)->toDateString());
+        $request->session()->put('oggi', Carbon::today()->toDateString());
 
-        return view('calendario.create', $data);
+
+       // $fromDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->toDateString(); // or ->format(..)
+       // $tillDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays(6)->toDateString();
+
+        for ($i = 0; $i < 6; $i++) {
+            $tillDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays($i)->toDateString();
+
+            $d = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y');
+
+            $settimana[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
+                ->wheredate('giorno','=', $tillDate)
+                ->with('commessa')
+                ->get();
+
+            $totore[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
+                ->wheredate('giorno','=', $tillDate)
+                ->with('commessa')
+                ->sum('n_ore');
+        }
+
+//        return \Response::json(array('settimana' => $settimana , 'totore' => $totore));
+
+//        Debugbar($data['mostUsed']);
+
+        return view('calendario.create', $data)
+            ->with('settimana' , $settimana)
+            ->with('totore' , $totore);
     }
 
     /**
@@ -43,6 +77,7 @@ class calendarioController extends Controller {
      */
     public function create() {
         //
+
 
         return $this->index();
     }
@@ -197,8 +232,8 @@ class calendarioController extends Controller {
 
         calendario::destroy($id);
 //        return redirect('calendar')->with('giorno', '2015-12-05')->with('ok_message', 'Eliminata');
-        $_REQUEST['giorno'] = '2015-12-05';
-        return redirect('calendar')->with($_REQUEST);
+
+        return redirect('calendario');
 
     }
 
@@ -206,6 +241,13 @@ class calendarioController extends Controller {
     public function calendar(Request $request) {
 
         \Debugbar::info($request['giorno']);
+
+        //session('giorno', ($request['giorno']));
+        $request->session()->flash('giorno', '2016-09-03' );
+
+
+        \Debugbar($request->session()->keep(['giorno']));
+
 
         if ($request['giorno'])
             $data = $request['giorno'];
@@ -237,7 +279,7 @@ class calendarioController extends Controller {
                 ->sum('n_ore');
         }
 
-
+        // return \Response::json(array('settimana' => $settimana , 'totore' => $totore));
 
         return view('calendario.calendar', compact('settimana'), compact('totore'));
     }

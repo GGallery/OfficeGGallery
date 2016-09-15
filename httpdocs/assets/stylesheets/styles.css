@@ -9130,38 +9130,19 @@ and open the template in the editor.
     Author     : Tony
 */
 
-.heigh1 {
-     height: 50px;
-}
-.heigh2 {
-     height: 100px;
-}
-.heigh3 {
-     height: 150px;
-}
-.heigh4 {
-     height: 200px;
-}
-.heigh5 {
-     height: 250px;
-}
-.heigh6 {
-     height: 300px;
-}
-
 
 #calendario .panel {
     margin-bottom: 0px !important;
 }
-
-
 
 #calendario .panel-body{
 	padding: 1px !important;
 }
 
 #calendario .panel-title{
-	font-size: 10px !important;
+    font-size: 13px !important;
+    font-weight: bold;
+    padding: 0px;
 }
 
 .autoWidth {
@@ -9169,5 +9150,8 @@ and open the template in the editor.
     margin:10px;
 }
 
-
+.list-group-item-tiny
+{
+    padding: 0px 12px;
+}
 /*# sourceMappingURL=styles.css.map */

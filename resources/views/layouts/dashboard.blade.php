@@ -75,11 +75,6 @@
                             <a href="{{ url ('feriepermessi') }}"><i class="fa fa-plane   fa-fw"></i>Ferie Permessi Recuperi</a>
                         </li>
 
-                        <li {{ (Request::is('*calendar') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('calendar') }}"><i class="fa fa-calendar fa-fw"></i>Calendario mie commesse</a>
-                        </li>
-
-
 
 
                         <li class="divider"></li>

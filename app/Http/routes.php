@@ -44,7 +44,7 @@ Route::group(array('middleware' => 'auth'), function() {
             ->where('giorno' ,'<',$tomorrow)
             ->where('approvato' , 1)
             ->get();
-        
+
         $data['assenze_domani'] = \App\calendario::where('type', '>' , 0)
             ->where('giorno' ,'>',$tomorrow)
             ->where('approvato' , 1)
@@ -115,9 +115,11 @@ Route::group(array('middleware' => 'auth'), function() {
 
     Route::resource('calendario', 'calendarioController');
     Route::resource('calendario.destroy', 'calendarioController@destroy');
+    
+
+    Route::resource('calendar', 'calendarioController@calendar'); //in disuso
 
 
-    Route::resource('calendar', 'calendarioController@calendar');
     Route::resource('feriepermessi', 'calendarioController@feriepermessi');
     Route::resource('approvazione', 'calendarioController@approvazione');
     Route::resource('rilevazione', 'calendarioController@rilevazione');
@@ -130,11 +132,6 @@ Route::group(array('middleware' => 'auth'), function() {
 
     //AUTOCOMPLETE 
     Route::get('autocomplete/commesse', 'ajaxRequestController@Commesse');
-
-
-
-
-
 
 //    Route::get('autocomplete', function() {
 //        return View::make('autocomplete');
