@@ -29,12 +29,12 @@ class ajaxRequestController extends Controller {
                         ->orWhere('protocollo', 'LIKE', '%' . $term . '%')
                         ->orWhere('nome', 'LIKE', '%' . $term . '%');
             })
-                ->select('cm_commesse.id', 'cm_commesse.protocollo', 'cm_commesse.oggetto')
+                ->select('cm_commesse.id', 'cm_commesse.protocollo', 'cm_commesse.oggetto' , 'cm_clienti.nome')
                 ->get();
 
 
         foreach ($queries as $query) {
-            $results[] = [ 'id' => $query->id, 'value' => $query->protocollo . ' ' . $query->oggetto];
+            $results[] = [ 'id' => $query->id, 'value' => $query->protocollo . ' ' . $query->oggetto . ' (' . $query->nome . ')'  ];
         }
         \Debugbar::info($results);
         return \Response::json($results);

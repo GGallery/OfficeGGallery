@@ -113,11 +113,8 @@
                    list-group-item
                    mostUsed
                    list-group-item-tiny
-                    @if($single->commessa->id>=1000)
-                               list-group-item-warning
-                               @endif
                                ">
-                        {{ $single->commessa->oggetto; }}
+                        {{ $single->commessa->oggetto; }}  ({{ $single->commessa->clienti->nome; }})
                     </a>
                 @endforeach
             </div>

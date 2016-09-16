@@ -33,7 +33,8 @@ class calendarioController extends Controller {
 
         if($request['giorno'])
             $request->session()->put('giorno', $request['giorno']);
-        else
+
+        if(!$request->session()->has('giorno'))
             $request->session()->put('giorno', Carbon::today()->toDateString());
 
         $cur_data = $request->session()->get('giorno');
@@ -52,18 +53,20 @@ class calendarioController extends Controller {
 
             $settimana[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
                 ->wheredate('giorno','=', $tillDate)
+                ->where('approvato' , '1')
                 ->with('commessa')
                 ->get();
 
             $totore[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
                 ->wheredate('giorno','=', $tillDate)
+                ->where('approvato' , '1')
                 ->with('commessa')
                 ->sum('n_ore');
         }
 
 //        return \Response::json(array('settimana' => $settimana , 'totore' => $totore));
 
-//        Debugbar($data['mostUsed']);
+        \Debugbar::info($cur_data);
 
         return view('calendario.create', $data)
             ->with('settimana' , $settimana)
@@ -141,6 +144,8 @@ class calendarioController extends Controller {
         } catch (Exception $e) {
             \Debugbar::addException($e);
         }
+
+        $request->session()->put('giorno', $giorno);
 
 
         if(!$calendario->approvato)

@@ -107,6 +107,7 @@ Route::group(array('middleware' => 'auth'), function() {
 
 
     Route::resource('users', 'usersController');
+    Route::resource('clienti', 'clientiController');
     Route::resource('commesse', 'commesseController');
     Route::get('userPerCommessa', 'commesseController@userPerCommessa');
 

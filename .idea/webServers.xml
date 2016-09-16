@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2fe90a95-c0ba-42ad-afa8-6966d8693d20" name="office.ggallery.it" url="http://office.ggallery.it">
+        <fileTransfer host="office.ggallery.it" port="21" password="dfeddfeddfcbdfc6dfc6dfcfdfd8dfd3df9adf9a" username="officegg">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
