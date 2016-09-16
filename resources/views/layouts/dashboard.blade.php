@@ -102,7 +102,7 @@
 
                         @if(Auth::user()->hasAnyGroups(array('Admin', 'Tutor')))
                             <li {{ (Request::is('*approvazione') ? 'class="active"' : '') }}>
-                                <a href="{{ url ('approvazione') }}"><i class="fa   fa-unlock-alt fa-fw"></i>Approvazione extra</a>
+                                <a href="{{ url ('approvazione') }}"><i class="fa   fa-unlock-alt fa-fw"></i>Approvazioni</a>
                             </li>
 
                         @endif
@@ -111,7 +111,7 @@
 
                         @if(Auth::user()->hasAnyGroups(array('Contabilita')))
                             <li {{ (Request::is('*rilevazione') ? 'class="active"' : '') }}>
-                                <a href="{{ url ('rilevazione') }}"><i class="fa   fa-unlock-alt fa-fw"></i>Rilevazione extra</a>
+                                <a href="{{ url ('rilevazione') }}"><i class="fa   fa-unlock-alt fa-fw"></i>Rilevazione ore</a>
                             </li>
                             @endif
 
