@@ -80,7 +80,6 @@
                         <li class="divider"></li>
                         <li class="divider"></li>
 
-
                         @if(Auth::user()->hasAnyGroups(array('Admin', 'Contabilita')))
                             <li {{ (Request::is('*Dipendenti') ? 'class="active"' : '') }}>
                                 <a href="{{ url ('users') }}"><i class="fa fa-user fa-fw"></i>Dipendenti</a>
