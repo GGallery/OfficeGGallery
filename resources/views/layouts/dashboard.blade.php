@@ -96,7 +96,7 @@
 
                         @if(Auth::user()->hasAnyGroups(array('Admin', 'Contabilita')))
                             <li {{ (Request::is('*Commesse') ? 'class="active"' : '') }}>
-                                <a href="{{ url ('commesse/create') }}"><i class="fa fa-dribbble  fa-fw"></i>Nuova Commesse</a>
+                                <a href="{{ url ('commesse/create') }}"><i class="fa fa-dribbble  fa-fw"></i>Nuova Commessa</a>
                             </li>
                         @endif
 
@@ -106,8 +106,6 @@
                             </li>
 
                         @endif
-
-
 
                         @if(Auth::user()->hasAnyGroups(array('Contabilita')))
                             <li {{ (Request::is('*rilevazione') ? 'class="active"' : '') }}>
