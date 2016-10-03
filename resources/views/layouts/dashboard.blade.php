@@ -99,15 +99,17 @@
                             </li>
                         @endif
 
+
+
                         @if(Auth::user()->hasAnyGroups(array('Admin', 'Contabilita')))
                             <li {{ (Request::is('*Clienti') ? 'class="active"' : '') }}>
-                                <a href="{{ url ('clienti/create') }}"><i class="fa fa-dribbble  fa-fw"></i>Nuovo Cliente</a>
+                                <a href="{{ url ('clienti') }}"><i class="fa fa-dribbble  fa-fw"></i>Clienti</a>
                             </li>
                         @endif
 
                         @if(Auth::user()->hasAnyGroups(array('Admin', 'Contabilita')))
                             <li {{ (Request::is('*Clienti') ? 'class="active"' : '') }}>
-                                <a href="{{ url ('clienti') }}"><i class="fa fa-dribbble  fa-fw"></i>Clienti</a>
+                                <a href="{{ url ('clienti/create') }}"><i class="fa fa-dribbble  fa-fw"></i>Nuovo Cliente</a>
                             </li>
                         @endif
 

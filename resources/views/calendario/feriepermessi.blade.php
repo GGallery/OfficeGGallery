@@ -61,7 +61,7 @@
                     <a href="#"
                        commessa_id="{{ $single->commessa_id; }}"
                        commessa_text="Recupero per {{ $single->oggetto; }}"
-                       type="3"
+                       type="5"
                        class="list-group-item  list-group-item-warning  ferieGroup">
                         Recupero per {{ $single->oggetto; }}
                         <span class="badge">{{ $single->credito; }}</span>
@@ -153,15 +153,13 @@
 
             });
 
-
             $( "#giorno" ).datepicker({
                 dateFormat: "yy-mm-dd",
                 changeMonth: true,
-                changeYear: true
+                changeYear: true,
+                constrainInput: true,
+                firstDay: 1
             });
-
-
-
 
 
         });

@@ -4,7 +4,6 @@
 
 @section('section')
 
-
     @if(count($errors->all()) > 0)
         <div class="alert alert-danger" role="alert">  <p><b>OOOPS!</b></p>
             <ul>
@@ -15,8 +14,17 @@
         </div>
     @endif
 
+    @if (session('ok_message'))
+        <div class="alert alert-success">
+            {{ session('ok_message') }}
+        </div>
+    @endif
+
+
     <div class="row">
         <div class="col-xs-12 col-md-6">
+
+
 
 
             {{ Form::open(['route' => 'calendario.store']) }}
@@ -210,6 +218,9 @@
                 constrainInput: true,
                 firstDay: 1
             });
+
+            $('.alert-success').delay(5000).fadeOut('slow');
+
         });
 
     </script>

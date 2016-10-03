@@ -15,7 +15,10 @@ and open the template in the editor.
 
 #calendario .panel-body{
 	padding: 1px !important;
+    font-size: xx-small;
 }
+
+
 
 #calendario .panel-title{
     font-size: 13px !important;

@@ -12,6 +12,10 @@
                 <span class="glyphicon glyphicon-trash pull-right" aria-hidden="true"></span>
             </a>
             <br>
+            @if($pup->type==5)
+                <button class="btn btn-danger btn-xs" type="button">RECUPERO</button>
+            @endif
+
             {{ $pup->commessa->oggetto }}
 
 
