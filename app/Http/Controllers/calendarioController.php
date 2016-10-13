@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\commesse;
+use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -43,8 +44,8 @@ class calendarioController extends Controller {
         $request->session()->put('oggi', Carbon::today()->toDateString());
 
 
-       // $fromDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->toDateString(); // or ->format(..)
-       // $tillDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays(6)->toDateString();
+        // $fromDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->toDateString(); // or ->format(..)
+        // $tillDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays(6)->toDateString();
 
         for ($i = 0; $i < 6; $i++) {
             $tillDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays($i)->toDateString();
@@ -200,17 +201,26 @@ class calendarioController extends Controller {
 
         //prima di salvare l'evento lo carico su google
         $event = new Event;
-        $event->name = $cal->user->nome." ".$cal->user->cognome  ." - ". $cal->commessa->oggetto ." " . $cal->type;
+        $event->name = $cal->user->nome." ".$cal->user->cognome  ." - ";
+
+        if($cal->type > 0 )
+            $event->name .= $cal->tipoassenza->tipo;
+        else
+            $event->name .= $cal->commessa->oggetto;
 
 
+        if($cal->type == 1) //Ferie
+        {
+            $event->startDate = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome');
+            $event->endDate = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome');
+        }
+        else {
+            $event->startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome');
+            $event->endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome')->addHours($cal->n_ore);
+            $event->startDateTime->setTimezone('UTC');
+            $event->endDateTime->setTimezone('UTC');
+        }
 
-        $event->startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome');
-        $event->endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $cal->giorno, 'Europe/Rome')->addHours($cal->n_ore);
-
-        $event->startDateTime->setTimezone('UTC');
-        $event->endDateTime->setTimezone('UTC');
-
-        \Debugbar::info($event->startDateTime);
 
         $return = $event->save();
 
@@ -234,9 +244,31 @@ class calendarioController extends Controller {
      */
     public function destroy($id) {
 
+        $cal = calendario::find($id);
+        $referente = User::where('id', Auth::user()->referente_id)->first();
 
+        if($cal->type > 0) {
+            Mail::send('emails.cancellato', [
+                'user' => $cal->user->cognome,
+                'evento' => $cal->tipoassenza->tipo,
+                'data' => $cal->giorno
+                ], function ($m) use ($referente) {
+                $m->from('office@ggallery.it', 'G A P');
+                $m->to($referente->email, $referente->nome)->subject('Evento cancellato');
+            });
+        }
+        
+        
+        
+        
+        $calendar_id = Calendario::find($id);
+        $calendar_id = $calendar_id->google_calendar_id;
+
+        if ($calendar_id) {
+            $event = Event::find($calendar_id);
+            $event->delete($calendar_id);
+        }
         calendario::destroy($id);
-//        return redirect('calendar')->with('giorno', '2015-12-05')->with('ok_message', 'Eliminata');
 
         return redirect('calendario');
 
