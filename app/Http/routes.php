@@ -56,6 +56,45 @@ Route::group(array('middleware' => 'auth'), function() {
     });
 
 
+    Route::resource('users', 'usersController');
+    Route::resource('clienti', 'clientiController');
+    Route::resource('commesse', 'commesseController');
+    Route::get('userPerCommessa', 'commesseController@userPerCommessa');
+
+
+
+
+    Route::resource('calendario', 'calendarioController');
+    Route::resource('calendario.destroy', 'calendarioController@destroy');
+
+
+    Route::resource('calendar', 'calendarioController@calendar'); //in disuso
+
+
+    Route::resource('feriepermessi', 'calendarioController@feriepermessi');
+    Route::resource('approvazione', 'calendarioController@approvazione');
+    Route::resource('rilevazione', 'calendarioController@rilevazione');
+    Route::resource('do_rileva', 'calendarioController@do_rileva');
+
+    Route::resource('google', 'googleController');
+
+    Route::get('/coupon', function() {
+        return View::make('coupon/ausind');
+    });
+
+
+    //AUTOCOMPLETE
+    Route::get('autocomplete/commesse', 'ajaxRequestController@Commesse');
+
+
+
+
+
+
+
+
+
+
     Route::get('/charts', function() {
         return View::make('mcharts');
     });
@@ -106,48 +145,9 @@ Route::group(array('middleware' => 'auth'), function() {
     });
 
 
-    Route::resource('users', 'usersController');
-    Route::resource('clienti', 'clientiController');
-    Route::resource('commesse', 'commesseController');
-    Route::get('userPerCommessa', 'commesseController@userPerCommessa');
 
 
-
-
-    Route::resource('calendario', 'calendarioController');
-    Route::resource('calendario.destroy', 'calendarioController@destroy');
-    
-
-    Route::resource('calendar', 'calendarioController@calendar'); //in disuso
-
-
-    Route::resource('feriepermessi', 'calendarioController@feriepermessi');
-    Route::resource('approvazione', 'calendarioController@approvazione');
-    Route::resource('rilevazione', 'calendarioController@rilevazione');
-    Route::resource('do_rileva', 'calendarioController@do_rileva');
-
-    Route::resource('google', 'googleController');
-
-
-
-
-    //AUTOCOMPLETE 
-    Route::get('autocomplete/commesse', 'ajaxRequestController@Commesse');
-
-//    Route::get('autocomplete', function() {
-//        return View::make('autocomplete');
-//    });
 });
-
-
-
-//    Route::get('/', [
-//        'middleware' => 'roles' ,
-//        'roles' => 'Users',
-//        function() {
-//            return View::make('home');
-//        }]);
-//
 
 
 Route::get('login', 'Auth\AuthController@getLogin');

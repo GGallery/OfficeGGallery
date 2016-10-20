@@ -128,6 +128,14 @@
                             @endif
 
 
+                        @if(Auth::user()->hasAnyGroups(array('Admin', 'Tutor')))
+                            <li {{ (Request::is('*coupon') ? 'class="active"' : '') }}>
+                                <a href="{{ url ('coupon') }}"><i class="fa fa-ticket fa-fw"></i>Coupon Ausind</a>
+                            </li>
+
+                            @endif
+
+
                                     <!--</li></ul>-->
 
 
