@@ -128,6 +128,11 @@ class calendarioController extends Controller {
         //        3 Straordinario **
         //        4 Recupero+
         //        5 Recupero- **
+        //        6 Malattia/Mutua
+        //	      7 Trasferta **
+
+
+
 
         $da_approvare= \App\assenzatipi::lists('da_approvare', 'id')->toArray();
 
@@ -343,10 +348,20 @@ class calendarioController extends Controller {
 
 
     public function rilevazione() {
+
+        //        1 Ferie**
+        //        2 Permesso**
+        //        3 Straordinario **
+        //        4 Recupero+
+        //        5 Recupero- **
+        //        6 Malattia/Mutua
+        //	      7 Trasferta **
+
+
         $data['rilevazione'] = calendario::whereNull('rilevato')
             ->where('approvato' , 1)
-            ->where('commessa_id' , 1)
-            ->whereIn('type' , [1,2,3,6])
+
+            ->whereIn('type' , [1,2,3,6,7])
             ->orderBy('dipendenti_id')
             ->get();
 
@@ -355,11 +370,13 @@ class calendarioController extends Controller {
 
     public function do_rileva() {
 
+
+
         $today = \Carbon\Carbon::today();
         $cal = calendario::whereNull('rilevato')
             ->where('approvato' , 1)
-            ->where('commessa_id' , 1)
-            ->whereIn('type' , [1,2,3,6])
+
+            ->whereIn('type' , [1,2,3,6,7])
             ->update(['rilevato' => $today]);
 
 

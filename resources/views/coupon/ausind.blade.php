@@ -60,6 +60,8 @@
                     <option value="20">Aggiornamento - Percezione del rischio</option>
                     <option value="21">Aggiornamento - Gestione delle emergenze</option>
                     <option value="22">Privacy</option>
+                    <option value="23">Corso Aggiornamento per Lavoratori - Corso completo</option>
+                    <option value="24">Formazione specifica rischio basso</option>
 
                     <option value="101">Pacchetto Aggiornamento</option>
 

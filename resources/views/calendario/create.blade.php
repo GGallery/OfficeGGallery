@@ -99,6 +99,14 @@
                               'class' => "btn btn-danger type "
                              ])}}
 
+                    {{Form::button('Trasferta' ,[
+                           'type' => 7,
+                           'type_text' => 'Trasferta ',
+                            'class' => "btn btn-primary type "
+                           ])}}
+
+
+
                 </div>
                 <div class="pull-right">
                     {{ Form::submit('Invia', ['class' => 'btn btn-success']) }}

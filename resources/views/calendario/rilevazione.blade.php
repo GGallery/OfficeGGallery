@@ -27,9 +27,6 @@
 
                 @foreach($rilevazione as $single)
 
-
-
-
                     <tr >
                         <td>{{ $single->user->cognome}}</td>
                         <td>{{ $single->user->nome}}</td>

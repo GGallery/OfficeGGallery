@@ -15,6 +15,10 @@
             @if($pup->type==5)
                 <button class="btn btn-danger btn-xs" type="button">RECUPERO</button>
             @endif
+            
+            @if($pup->type==7)
+                <button class="btn btn-default btn-xs" type="button">TRASFERTA</button>
+            @endif
 
             {{ $pup->commessa->oggetto }}
 

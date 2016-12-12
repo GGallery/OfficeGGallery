@@ -37,13 +37,15 @@ class commesseController extends Controller {
      */
     public function create() {
 
-        $clienti_list = [''=>''] + clienti::lists('nome', 'id')->all();
+        $clienti_list = [''=>''] + clienti::orderBy('nome')->lists('nome', 'id')->all();
         $user= [''=>'']  +  user::where('bloccato' , 0)->orderBy('cognome')->lists('cognome', 'id')->all();
-        $commesse = commesse::where('abilitata', 1)->orderBy('id', 'desc')->get();
+        $commesseg = commesse::where('abilitata', 1)->where('protocollo' , 'like' ,'G%')->orderBy('id', 'desc')->get();
+        $commesseh = commesse::where('abilitata', 1)->where('protocollo' , 'like' ,'H%')->orderBy('id', 'desc')->get();
 
         return view('commesse.new')
             ->with('user', $user)
-            ->with('commesse', $commesse)
+            ->with('commesseg', $commesseg)
+            ->with('commesseh', $commesseh)
             ->with('clienti_list', $clienti_list);
     }
 

@@ -64,23 +64,35 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="pull-right" id="q">
+                {{ Form::submit('inserisci', ['class' => 'btn btn-success']) }}
 
-        <div class="pull-right" id="q">
-            {{ Form::submit('inserisci', ['class' => 'btn btn-success']) }}
-
-            {{ Form::close() }}
-
-
-        </div>
+                {{ Form::close() }}
 
 
-        <div class="col-md-6">
-            {{ Form::label('Riepilogo commesse esistenti') }}
-            <div class="pre-scrollable">
-                @foreach($commesse as $commessa)
-                    <p> {{$commessa->protocollo}} - {{ $commessa->oggetto }}</p>
-                @endforeach
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ Form::label('Riepilogo commesse esistenti G') }}
+                <div class="pre-scrollable">
+                    @foreach($commesseg as $commessa)
+                        <p> {{$commessa->protocollo}} - {{ $commessa->oggetto }}</p>
+                    @endforeach
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                {{ Form::label('Riepilogo commesse esistenti H') }}
+                <div class="pre-scrollable">
+                    @foreach($commesseh as $commessa)
+                        <p> {{$commessa->protocollo}} - {{ $commessa->oggetto }}</p>
+                    @endforeach
+                </div>
+            </div>
+
         </div>
 
 
