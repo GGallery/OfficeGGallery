@@ -22,11 +22,13 @@ Route::group(array('middleware' => 'auth'), function() {
             ->where('giorno' ,'>',$today)
             ->where('giorno' ,'<',$tomorrow)
             ->where('approvato' , 1)
+            ->orderBy('giorno' ,'asc')
             ->get();
 
         $data['assenze_domani'] = \App\calendario::where('type', '>' , 0)
             ->where('giorno' ,'>',$tomorrow)
             ->where('approvato' , 1)
+            ->orderBy('giorno' ,'asc')
             ->get();
 
         $data['ultime_commesse'] = \App\commesse::take(10)->orderBy('created_at', 'desc')->get();
@@ -43,11 +45,13 @@ Route::group(array('middleware' => 'auth'), function() {
             ->where('giorno' ,'>',$today)
             ->where('giorno' ,'<',$tomorrow)
             ->where('approvato' , 1)
+            ->orderBy('giorno' ,'asc')
             ->get();
 
         $data['assenze_domani'] = \App\calendario::where('type', '>' , 0)
             ->where('giorno' ,'>',$tomorrow)
             ->where('approvato' , 1)
+            ->orderBy('giorno' ,'asc')
             ->get();
 
         $data['ultime_commesse'] = \App\commesse::take(10)->orderBy('created_at', 'desc')->get();
@@ -78,6 +82,8 @@ Route::group(array('middleware' => 'auth'), function() {
 
     Route::resource('google', 'googleController');
 
+
+    Route::resource('controllocf', 'utilityController@controllocf');
     Route::get('/coupon', function() {
         return View::make('coupon/ausind');
     });

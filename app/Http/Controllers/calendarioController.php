@@ -270,8 +270,14 @@ class calendarioController extends Controller {
         $calendar_id = $calendar_id->google_calendar_id;
 
         if ($calendar_id) {
-            $event = Event::find($calendar_id);
-            $event->delete($calendar_id);
+            try {
+                $event = Event::find($calendar_id);
+                $event->delete($calendar_id);
+            }
+            catch (Exception $e)
+            {
+                \DebugBar::log($e);
+            }
         }
         calendario::destroy($id);
 
