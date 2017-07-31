@@ -19,6 +19,14 @@ class utilityController extends Controller
         //
     }
 
+    public function coupon()
+    {
+        //
+        
+        
+        return view('utility/ausind');
+    }
+
 
     public function controllocf(Request $request)
     {

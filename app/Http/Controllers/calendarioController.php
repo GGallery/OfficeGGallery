@@ -25,12 +25,15 @@ class calendarioController extends Controller {
     public function index(Request $request) {
         //
         $data['mostUsed'] = calendario::take(6)
+            ->select('dipendenti_id', 'commessa_id')
             ->where('dipendenti_id',  Auth::user()->id)
             ->where('commessa_id', ">" ,  1)
             ->with('commessa')
             ->orderBy('giorno', 'desc')
             ->distinct()
             ->get();
+
+
 
         if($request['giorno'])
             $request->session()->put('giorno', $request['giorno']);

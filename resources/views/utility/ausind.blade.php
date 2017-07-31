@@ -18,7 +18,7 @@
         }
         select,
         input {
-            width: 300px;
+            width: 450px;
         }
         strong {
             color:#000;
@@ -63,7 +63,12 @@
                     <option value="23">Corso Aggiornamento per Lavoratori - Corso completo</option>
                     <option value="24">Formazione specifica rischio basso</option>
 
+                    <option value="25">Progetto GAIA: allergie e intolleranze alimentari, celiachia</option>
+                    <option value="26">Pillola di Aggiornamento - Rischio biologico e rischio chimico</option>
+                    <option value="27">Corso di Formazione sul D. Lgs. 231/01 - Casa di Cura Villa Montallegro</option>
+
                     <option value="101">Pacchetto Aggiornamento</option>
+                    <option value="102">Pacchetto Cameo</option>
 
 
 

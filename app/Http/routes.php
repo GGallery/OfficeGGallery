@@ -84,16 +84,15 @@ Route::group(array('middleware' => 'auth'), function() {
 
 
     Route::resource('controllocf', 'utilityController@controllocf');
-    Route::get('/coupon', function() {
-        return View::make('coupon/ausind');
-    });
+    Route::resource('coupon', 'utilityController@coupon');
+
+//    Route::get('/coupon', function() {
+//        return View::make('coupon/ausind');
+//    });
 
 
     //AUTOCOMPLETE
     Route::get('autocomplete/commesse', 'ajaxRequestController@Commesse');
-
-
-
 
 
 
@@ -162,4 +161,8 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 
 Route::get('register', 'Auth\AuthController@getRegister');
 Route::post('register', 'Auth\AuthController@postRegister');
+
+//    A  P  I
+
+Route::get('miecommesse', 'apiController@getMieCommesse');
 

@@ -62,6 +62,10 @@
                     <option value="22">Privacy</option>
                     <option value="23">Corso Aggiornamento per Lavoratori - Corso completo</option>
                     <option value="24">Formazione specifica rischio basso</option>
+                    
+                    <option value="25">Gaia il pianeta che vive</option>
+                    <option value="26">Rischio chimico biologico</option>
+                    <option value="27">231 Montallegro</option>
 
                     <option value="101">Pacchetto Aggiornamento</option>
 

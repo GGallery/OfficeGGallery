@@ -162,6 +162,7 @@ class commesseController extends Controller {
         $data = \App\calendario::
             select('*', DB::raw('SUM(n_ore) as tot'))
             ->where('commessa_id', $id)
+            ->where('type', '<>' , '5') //escludo i recuperi-   
             ->with('user')
             ->with('commessa')
             ->groupBy('dipendenti_id')

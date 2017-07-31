@@ -38,7 +38,7 @@ class utily extends Model
     public function docheck($cf)
     {
         $cf = strtoupper($cf);
-        
+
         if( $cf === '' ) {
             $res['valido']= false;
             $res['msg'] = 'non è compilato';
@@ -46,6 +46,19 @@ class utily extends Model
             return $res;
         } ;
         if( strlen($cf) != 16 ){
+
+            if(strlen($cf) == 15){
+                $possibile = $this->try_resolve($cf);
+
+                if($possibile) {
+                    $res['valido'] = false;
+                    $res['msg'] = "Dovrebbe essere cosi =>" . $possibile;
+                    $res['cf'] = $cf;
+                    return $res;
+                }
+            }
+
+
             $res['valido']= false;
             $res['msg'] = "ha una lunghezza non \n"
                 ."corretta: il codice fiscale dovrebbe essere lungo\n"
@@ -53,9 +66,6 @@ class utily extends Model
             $res['cf'] = $cf;
             return $res;
         }
-
-
-
 
         if( preg_match("/^[A-Z0-9]+\$/", $cf) != 1 ){
 
@@ -131,6 +141,18 @@ class utily extends Model
     }
 
 
+    public function try_resolve($cf){
 
+        $alfabeto = array('a', 'b','c','d','e','g','h','i','l','m','n','o','p','q','r','s','t','u','v','z','w','y','k', 'j', 'f');
+
+        foreach ($alfabeto as $lettera){
+
+            $tmp = strtoupper($cf.$lettera);
+            $check = $this->docheck($tmp);
+            if($check['valido'])
+                return $tmp;
+        }
+
+    }
 
 }
