@@ -164,5 +164,8 @@ Route::post('register', 'Auth\AuthController@postRegister');
 
 //    A  P  I
 
-Route::get('miecommesse', 'apiController@getMieCommesse');
+Route::get('api/commesseMie', 'apiController@getMieCommesse');
+Route::get('api/commesseAll', 'apiController@getAllCommesse');
+Route::get('api/assenti', 'apiController@getAssenti');
+Route::get('api/userAuth', 'apiController@userAuth');
 
