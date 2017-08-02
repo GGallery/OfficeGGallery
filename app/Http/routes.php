@@ -164,8 +164,22 @@ Route::post('register', 'Auth\AuthController@postRegister');
 
 //    A  P  I
 
-Route::get('api/commesseMie', 'apiController@getMieCommesse');
-Route::get('api/commesseAll', 'apiController@getAllCommesse');
-Route::get('api/assenti', 'apiController@getAssenti');
-Route::get('api/userAuth', 'apiController@userAuth');
+//Route::get('api/commesseMie', 'apiController@getMieCommesse');
+//Route::get('api/commesseAll', 'apiController@getAllCommesse');
+//Route::get('api/assenti', 'apiController@getAssenti');
+//Route::get('api/userAuth', 'apiController@userAuth');
 
+//Route::group(['middleware' => ['api','cors'],'prefix' => 'api'], function () {
+    Route::group(['prefix' => 'api'], function () {
+
+    Route::get('register', 'APIController@register');
+
+    Route::get('login', 'APIController@login');
+
+    Route::group(['middleware' => 'jwt-auth'], function () {
+
+        Route::get('get_user_details', 'APIController@get_user_details');
+
+    });
+
+});

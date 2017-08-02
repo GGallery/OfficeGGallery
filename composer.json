@@ -10,7 +10,8 @@
 		"laravelcollective/html": "5.2.*",
 		"barryvdh/laravel-debugbar": "^2.2",
 		"spatie/laravel-google-calendar": "^1.0",
-		"guzzlehttp/guzzle": "~5.3|~6.0"
+		"guzzlehttp/guzzle": "~5.3|~6.0",
+		"tymon/jwt-auth": "^0.5.12"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

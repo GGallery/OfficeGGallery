@@ -151,6 +151,8 @@ return [
         'Barryvdh\Debugbar\ServiceProvider',
 
         Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
+
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
         
     ],
     /*
@@ -206,6 +208,8 @@ return [
         'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
         'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
+
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth'
     ],
 
 
