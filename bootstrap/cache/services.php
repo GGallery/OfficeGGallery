@@ -31,6 +31,7 @@
     27 => 'Barryvdh\\Debugbar\\ServiceProvider',
     28 => 'Spatie\\GoogleCalendar\\GoogleCalendarServiceProvider',
     29 => 'Tymon\\JWTAuth\\Providers\\JWTAuthServiceProvider',
+    30 => 'Barryvdh\\Cors\\ServiceProvider',
   ),
   'eager' => 
   array (
@@ -50,6 +51,7 @@
     13 => 'Barryvdh\\Debugbar\\ServiceProvider',
     14 => 'Spatie\\GoogleCalendar\\GoogleCalendarServiceProvider',
     15 => 'Tymon\\JWTAuth\\Providers\\JWTAuthServiceProvider',
+    16 => 'Barryvdh\\Cors\\ServiceProvider',
   ),
   'deferred' => 
   array (

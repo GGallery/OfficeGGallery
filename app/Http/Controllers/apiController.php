@@ -10,6 +10,8 @@ use Hash;
 
 use JWTAuth;
 
+use DB;
+
 class APIController extends Controller
 
 {
@@ -39,7 +41,7 @@ class APIController extends Controller
         $input = $request->all();
 
 //        $input = json_encode($input);
-
+//
 //        print_r($input);
 
 
@@ -48,12 +50,12 @@ class APIController extends Controller
 
 //            return view('welcome');
 
-            return response()->json(['result' => 'wrong email or password.']);
+            return response()->json(['result' => 'wrong email or password.', 'valid' => 'false']);
 
         }
 
 
-        return response()->json(['result' => $token]);
+        return response()->json(['result' => $token, 'valid' => 'true']);
 
     }
 
@@ -69,6 +71,59 @@ class APIController extends Controller
 
         return response()->json(['result' => $user]);
 
+    }
+
+    public function getMieCommesse(){
+        $id = 1;
+
+        $data = DB::table('cm_commesse')
+            ->select('cm_commesse.*')
+            ->join('cm_calendario', 'cm_commesse.id' , '=' , 'cm_calendario.commessa_id' )
+            ->where('dipendenti_id', 1)
+            ->where('commessa_id', ">" ,  1)
+            ->orderBy('giorno', 'desc')
+            ->distinct()
+            ->take(10)
+            ->get();
+
+//        return view('welcome');
+        return response()->json($data);
+    }
+
+    public function getAllCommesse(){
+        $id = 1;
+
+        $data = DB::table('cm_commesse')
+            ->orderBy('cm_commesse.id', 'desc')
+            ->distinct()
+            ->get();
+
+//        return view('welcome');
+        return response()->json($data);
+    }
+
+    public function getAssenti(){
+        $today = \Carbon\Carbon::today();
+        $tomorrow = \Carbon\Carbon::tomorrow();
+
+        $data['assenze_oggi'] = \App\calendario::where('type', '>' , 0)
+            ->with('User')
+            ->where('giorno' ,'>',$today)
+            ->where('giorno' ,'<',$tomorrow)
+            ->where('approvato' , 1)
+            ->orderBy('giorno' ,'asc')
+            ->get();
+
+        $data['assenze_domani'] = \App\calendario::where('type', '>' , 0)
+            ->with('User')
+            ->where('giorno' ,'>',$tomorrow)
+            ->where('approvato' , 1)
+            ->orderBy('giorno' ,'asc')
+            ->get();
+
+        return response()->json($data);
+
+//        return View::make('home')->with($data);
     }
 
 

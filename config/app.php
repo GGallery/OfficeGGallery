@@ -153,6 +153,8 @@ return [
         Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
 
         'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+
+        Barryvdh\Cors\ServiceProvider::class,
         
     ],
     /*
@@ -209,7 +211,9 @@ return [
 
         'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
 
-        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth'
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
+
     ],
 
 
