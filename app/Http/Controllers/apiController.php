@@ -14,7 +14,7 @@ use DB;
 
 use Carbon\Carbon;
 
-class apiController extends Controller
+class APIController extends Controller
 
 {
 
