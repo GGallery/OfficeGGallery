@@ -12,7 +12,9 @@ use JWTAuth;
 
 use DB;
 
-class APIController extends Controller
+use Carbon\Carbon;
+
+class apiController extends Controller
 
 {
 
@@ -73,7 +75,8 @@ class APIController extends Controller
 
     }
 
-    public function getMieCommesse(){
+
+    public function commesse_mie(Request $request){
         $id = 1;
 
         $data = DB::table('cm_commesse')
@@ -90,7 +93,7 @@ class APIController extends Controller
         return response()->json($data);
     }
 
-    public function getAllCommesse(){
+    public function commesse_all( ){
         $id = 1;
 
         $data = DB::table('cm_commesse')
@@ -102,7 +105,7 @@ class APIController extends Controller
         return response()->json($data);
     }
 
-    public function getAssenti(){
+    public function getAssenti( ){
         $today = \Carbon\Carbon::today();
         $tomorrow = \Carbon\Carbon::tomorrow();
 
@@ -126,6 +129,80 @@ class APIController extends Controller
 //        return View::make('home')->with($data);
     }
 
+
+    public function commessa_store(Request $request){
+
+        $input = $request->all();
+        $user = JWTAuth::toUser($input['token']);
+
+
+        $calendario = new \App\calendario();
+
+        $calendario->dipendenti_id = $user->id;
+        $calendario->commessa_id = $request->input('commessa_id');
+        $calendario->n_ore = $request->input('n_ore');
+
+
+        $giorno = $request->input('giorno');
+        $ora = $request->input('dalle_ore');
+
+        $calendario->giorno = Carbon::createFromFormat('Y-m-d H', $giorno.' '. $ora );
+
+        $calendario->type= $request->input('type');
+
+
+        //        1 Ferie**
+        //        2 Permesso**
+        //        3 Straordinario **
+        //        4 Recupero+
+        //        5 Recupero- **
+        //        6 Malattia/Mutua
+        //	      7 Trasferta **
+
+
+
+
+        $da_approvare= \App\assenzatipi::lists('da_approvare', 'id')->toArray();
+
+
+        if($da_approvare[$calendario->type]) {
+            $response['approvato'] = 'false';
+            $calendario->approvato = 0;
+        }
+        else {
+            $calendario->approvato = 1;
+            $response['approvato'] = 'true';
+        }
+
+        \Debugbar::info($calendario->approvato, "approvato?");
+
+
+        try {
+            $calendario->save();
+            $response['esito'] = 'true';
+        } catch (Exception $e) {
+            $response['esito'] = 'false';
+            \Debugbar::addException($e);
+        }
+
+        if(!$calendario->approvato)
+        {
+            $referente = User::where('id', $user->referente_id)->first();
+
+            \Debugbar::info($referente->email);
+
+            Mail::send('emails.approvazione', ['user' => $referente->nome], function ($m) use ($referente) {
+                $m->from('office@ggallery.it', 'G A P');
+//                $m->to($referente->email, $referente->name)->subject('Richiesto intervento');
+                $m->to('antonio@gallerygroup.it', $referente->name)->subject('Richiesto intervento');
+            });
+        }
+
+
+
+
+        return response()->json($response);
+    }
 
 
 }

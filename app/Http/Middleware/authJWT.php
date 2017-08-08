@@ -33,7 +33,7 @@ class authJWT
 
             }else{
 
-                return response()->json(['error'=>'Something is wrong']);
+                return response()->json(['error'=>'Something is wrong in authJWT su Larravel ']);
 
             }
 

@@ -164,21 +164,10 @@ Route::post('register', 'Auth\AuthController@postRegister');
 
 //    A  P  I
 
-//Route::get('api/commesseMie', 'apiController@getMieCommesse');
-//Route::get('api/commesseAll', 'apiController@getAllCommesse');
-//Route::get('api/assenti', 'apiController@getAssenti');
-//Route::get('api/userAuth', 'apiController@userAuth');
 
 Route::group(['middleware' => ['cors' ], 'prefix' => 'api'], function () {
 
-    Route::get('test', function() {
-        return View::make('Welcome');
-    });
-
-
     Route::post('register', 'APIController@register');
-
-
 
     Route::get('login', 'APIController@login');
 
@@ -186,8 +175,9 @@ Route::group(['middleware' => ['cors' ], 'prefix' => 'api'], function () {
 
         Route::get('get_user_details', 'APIController@get_user_details');
         Route::get('assenti', 'APIController@getAssenti');
-        Route::get('commesseMie', 'apiController@getMieCommesse');
-        Route::get('commesseAll', 'apiController@getAllCommesse');
+        Route::get('commesse_mie', 'APIController@commesse_mie');
+        Route::get('commesse_all', 'APIController@commesse_all');
+        Route::post('commessa_store', 'APIController@commessa_store');
 
     });
 });
