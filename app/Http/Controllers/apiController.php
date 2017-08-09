@@ -14,65 +14,42 @@ use DB;
 
 use Carbon\Carbon;
 
+use \App\calendario;
+
 class APIController extends Controller
 
 {
 
 
 
-    public function register(Request $request)
-
-    {
+    public function register(Request $request){
 
         $input = $request->all();
-
         $input['password'] = Hash::make($input['password']);
-
         User::create($input);
-
         return response()->json(['result'=>true]);
-
     }
 
 
 
-    public function login(Request $request)
-
-    {
+    public function login(Request $request){
 
         $input = $request->all();
-
-//        $input = json_encode($input);
-//
-//        print_r($input);
-
-
+ 
         if (!$token = JWTAuth::attempt($input)) {
 
-
-//            return view('welcome');
-
             return response()->json(['result' => 'wrong email or password.', 'valid' => 'false']);
-
         }
-
-
         return response()->json(['result' => $token, 'valid' => 'true']);
-
     }
 
-
-
-    public function get_user_details(Request $request)
-
-    {
+    public function get_user_details(Request $request){
 
         $input = $request->all();
 
         $user = JWTAuth::toUser($input['token']);
 
         return response()->json(['result' => $user]);
-
     }
 
 
@@ -198,10 +175,51 @@ class APIController extends Controller
             });
         }
 
-
-
-
         return response()->json($response);
+    }
+
+
+     public function get_calendario(Request $request) {
+        //
+
+        $cur_data = $request['giorno'];
+
+        // $fromDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->toDateString(); // or ->format(..)
+        // $tillDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays(6)->toDateString();
+
+        //for ($i = 0; $i < 6; $i++) {
+          //  $tillDate = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays($i)->toDateString();
+
+         //   $d = Carbon::createFromFormat('Y-m-d', $cur_data)->startOfWeek()->addDays($i)->formatLocalized('%A %d/%m/%y');
+
+
+        $giorno = Carbon::createFromFormat('Y-m-d', $cur_data)->toDateString();
+
+
+        $user = JWTAuth::toUser($request['token']);
+
+            $commesse  = calendario::where('dipendenti_id', $user->id)
+                ->wheredate('giorno','=', $giorno)
+                ->where('approvato' , '1')
+                ->with('commessa')
+                ->get();
+
+            $totore = calendario::where('dipendenti_id', $user->id)
+                ->wheredate('giorno','=', $giorno)
+                ->where('approvato' , '1')
+                ->with('commessa')
+                ->sum('n_ore');
+        
+
+
+
+
+
+
+$res['commesse'] = $commesse;
+$res['totore'] = $totore;
+return response()->json($res);
+
     }
 
 

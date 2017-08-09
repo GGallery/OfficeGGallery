@@ -178,6 +178,7 @@ Route::group(['middleware' => ['cors' ], 'prefix' => 'api'], function () {
         Route::get('commesse_mie', 'APIController@commesse_mie');
         Route::get('commesse_all', 'APIController@commesse_all');
         Route::post('commessa_store', 'APIController@commessa_store');
+        Route::get('get_calendario', 'APIController@get_calendario');
 
     });
 });
