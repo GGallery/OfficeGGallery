@@ -77,6 +77,33 @@ class calendarioController extends Controller {
             ->with('totore' , $totore);
     }
 
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function riepilogo(Request $request) {
+        //
+        //        1 Ferie**
+        //        2 Permesso**
+        //        3 Straordinario **
+        //        4 Recupero+
+        //        5 Recupero- **
+        //        6 Malattia/Mutua
+        //	      7 Trasferta **
+
+        
+        $data['riepilogo'] = calendario::where('dipendenti_id', \Auth()->user()->id)
+            ->with('commessa')
+            ->where('type' ,'>' , 0)
+            ->orderBy('giorno', 'desc')
+            ->get();
+
+        \Debugbar::info($data);
+
+        return view('calendario.riepilogo', $data);
+    }
     /**
      * Show the form for creating a new resource.
      *

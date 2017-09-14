@@ -69,6 +69,7 @@ Route::group(array('middleware' => 'auth'), function() {
 
 
     Route::resource('calendario', 'calendarioController');
+    Route::resource('riepilogo', 'calendarioController@riepilogo');
     Route::resource('calendario.destroy', 'calendarioController@destroy');
 
 

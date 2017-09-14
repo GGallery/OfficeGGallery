@@ -75,6 +75,10 @@
                             <a href="{{ url ('feriepermessi') }}"><i class="fa fa-plane   fa-fw"></i>Ferie Permessi Recuperi</a>
                         </li>
 
+                        <li {{ (Request::is('*riepilogo') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('riepilogo') }}"><i class="fa fa-list   fa-fw"></i>Riepilogo Ferie/Permessi/Rec</a>
+                        </li>
+
 
 
                         <li class="divider"></li>
