@@ -9,9 +9,7 @@ return [
 
     /**
      *  The id of the Google Calendar that will be used by default.
+    xsxaxnxtxoxrxox.xlxuxcxixaxnxax8x3x@xgxmxaxixlx.xcxoxmxMxaxlxuxnxixcxgxixox2x3x
      */
     'calendar_id' => '68d5rh29k3blp35q68q8fhsig8@group.calendar.google.com',
-
-    /*xsxaxnxtxoxrxox.xlxuxcxixaxnxax8x3x@xgxmxaxixlx.xcxoxmxMxaxlxuxnxixcxgxixox2x3x*/
-
 ];
