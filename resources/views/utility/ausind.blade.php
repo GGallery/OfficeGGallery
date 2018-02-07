@@ -67,6 +67,7 @@
                     <option value="26">Pillola di Aggiornamento - Rischio biologico e rischio chimico</option>
                     <option value="27">Corso di Formazione sul D. Lgs. 231/01 - Casa di Cura Villa Montallegro</option>
                     <option value="28">SmartWorking</option>
+                    <option value="29">231 IIS</option>
 
                     <option value="101">Pacchetto Aggiornamento</option>
                     <option value="102">Pacchetto Cameo</option>
