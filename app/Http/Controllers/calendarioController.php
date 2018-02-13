@@ -57,13 +57,13 @@ class calendarioController extends Controller {
 
             $settimana[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
                 ->wheredate('giorno','=', $tillDate)
-                ->where('approvato' , '1')
+//                ->where('approvato' , '1')
                 ->with('commessa')
                 ->get();
 
             $totore[$d] = calendario::where('dipendenti_id', \Auth()->user()->id)
                 ->wheredate('giorno','=', $tillDate)
-                ->where('approvato' , '1')
+//                ->where('approvato' , '1')
                 ->with('commessa')
                 ->sum('n_ore');
         }
