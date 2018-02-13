@@ -40,9 +40,10 @@
 
         <div id="form_container">
             <form id="coupon_form" method="post" action="index.php">
-                <label>Ragione sociale</label><input type="text" name="ragione_sociale" /><br />
-                <label>Username</label><input type="text" name="piva" /><br />
-                <label>E-Mail</label><input type="text" name="mail" value="antonio@ggallery.it" /><br />
+                <label>Ragione sociale</label><input type="text" name="ragione_sociale" placeholder="Ragione sociale dell'azienda"/><br />
+                <label>Username</label><input type="text" name="piva" placeholder="Partita IVA dell'azienda"/><br />
+                <label>E-Mail</label><input type="text" name="mail"  placeholder="Email del referente aziendale" /><br />
+                <label>ATECO</label><input type="text" name="ateco"   placeholder="Necessario solo per SPI-WEB" /><br />
                 <label>Corso</label>
                 <select name="corso">
                     <option value="1" selected="selected">Formazione Generale dei Lavoratori [IT]</option>
@@ -76,7 +77,7 @@
 
 
                 </select><br />
-                <label>Numero</label><input type="text" name="num" /><br />
+                <label>Numero</label><input type="text" name="num" placeholder="Numero di coupon da produrre"/><br />
                 <label>Attestato</label><input type="checkbox" name="attestato" checked="checked" /><br />
                 <label>Venditrice</label>
                 <select name="seller">
