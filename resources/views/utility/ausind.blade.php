@@ -72,6 +72,7 @@
 
                     <option value="101">Pacchetto Aggiornamento</option>
                     <option value="102">Pacchetto Cameo</option>
+                    <option value="103">Pacchetto Ansaldo</option>
 
 
 
