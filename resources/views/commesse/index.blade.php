@@ -144,9 +144,11 @@
 
             $( ".dettagli" ).click(function(){
                 var btnId = $(this).attr('id');
+                var from= $('#from').val();
+                var to= $('#to').val();
                 $('.td_dettagli[data-id=' + btnId + ']').toggle();
 
-                $.get( APP_URL+"/userPerCommessa", { id: btnId} )
+                $.get( APP_URL+"/userPerCommessa", { id: btnId, from: from, to:to} )
                         .done(function( data ) {
 
 

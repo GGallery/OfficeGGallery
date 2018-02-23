@@ -158,16 +158,24 @@ class commesseController extends Controller {
 
     public function userPerCommessa(){
         $id=Input::get('id');
+        $from=Input::get('from');
+        $to=Input::get('to');
 
         $data = \App\calendario::
             select('*', DB::raw('SUM(n_ore) as tot'))
             ->where('commessa_id', $id)
-            ->where('type', '<>' , '5') //escludo i recuperi-   
-            ->with('user')
-            ->with('commessa')
-            ->groupBy('dipendenti_id')
-            ->get();
+            ->where('type', '<>' , '5'); //escludo i recuperi-
 
+        if($from)
+            $data=$data->whereDate('giorno', '>=' , "$from");
+
+        if($to)
+            $data=$data->whereDate('giorno' , '<=',  "$to");
+
+        $data = $data->with('user')
+                    ->with('commessa')
+                    ->groupBy('dipendenti_id')
+                    ->get();
 
         $info = $data->first();
 

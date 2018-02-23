@@ -38,7 +38,9 @@ class commesse extends Model
 
         $data = \App\calendario::
         select('*', DB::raw('SUM(n_ore) as tot'))
-            ->with('commessa');
+            ->with('commessa')
+            ->where('type', '<>' , '5'); //escludo i recuperi-
+
 
         if(Input::has("search"))
         {
