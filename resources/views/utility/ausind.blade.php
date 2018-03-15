@@ -92,6 +92,7 @@
                     <option value="124_ggallery" selected="selected">GGallery</option>
                     <option value="143_cesisrl">CE.S.I - Confindustria Alessandria</option>
                     <option value="497_DeAGostini">DeAgostini</option>
+                    <option value="710_SPI-WEB">DeAgostini</option>
                 </select><br /><br />
                 <div align="center">
                     <input type="submit" name="coupon-submit" value="Invia" />
